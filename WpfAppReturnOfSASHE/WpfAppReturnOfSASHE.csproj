@@ -95,7 +95,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Bilder\HintergrundBilder\Raum1.png" />
+    <Folder Include="Bilder\Charakter\" />
+    <Folder Include="Bilder\Hindernis\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Bilder\HintergrundBilder\Raum2.png" />
@@ -104,8 +105,19 @@
     <Resource Include="Bilder\HintergrundBilder\Zwischenraum.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Bilder\Charakter\" />
-    <Folder Include="Bilder\Hindernis\" />
+    <Resource Include="Bilder\HintergrundBilder\Raum1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\HintergrundBilder\Hintergrund.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\HintergrundBilder\Raum4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\HintergrundBilder\Raum3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\HintergrundBilder\Decke.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

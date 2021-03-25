@@ -5,52 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppReturnOfSASHE"
         mc:Ignorable="d"
-        Title="Return of SASHE" Height="450" Width="800">
+        Title="Return of SASHE" Height="579.5" Width="800">
 
-    <Canvas Name="myCanvas" Focusable="true">
+    <Canvas Name="myCanvas" Focusable="true" Margin="4,-3,-4,3">
 
-        <Rectangle x:Name="hintergrund1" Width="1579" Height="376" Canvas.Left="-289" Canvas.Top="17" RenderTransformOrigin="0.5,0.5" Fill="DarkGray" >
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="-0.118"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="-1.401"/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
+        
+        <Rectangle x:Name="hintergrund1" Width="1579" Height="376" Canvas.Left="0" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="DarkGray" Panel.ZIndex="2" >
+            
         </Rectangle>
 
-        <Rectangle x:Name="hintergrundZwischenraum" Width="480" Height="376" Canvas.Left="1290" Canvas.Top="15" RenderTransformOrigin="0.5,0.5" Fill="Gray" >
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="-0.118"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="-1.401"/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
+        
+
+        <Rectangle x:Name="hintergrundZwischenraum2" Width="480" Height="376" Canvas.Left="3399" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="Gray" Panel.ZIndex="5" >
+
         </Rectangle>
 
-        <Rectangle x:Name="hintergrund3" Width="1579" Height="376" Canvas.Left="1770" Canvas.Top="13" RenderTransformOrigin="0.5,0.5" Fill="LightGray" >
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="-0.118"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="-1.401"/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
+
+        <Rectangle x:Name="hintergrundZwischenraum1" Width="480" Height="376" Canvas.Left="1509" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="Gray" Panel.ZIndex="5" >
+
         </Rectangle>
-        <Rectangle x:Name="hintergrundZwischenraum_Copy" Width="480" Height="376" Canvas.Left="3349" Canvas.Top="11" RenderTransformOrigin="0.5,0.5" Fill="Gray" >
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="-0.118"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="-1.401"/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
+
+        <Rectangle x:Name="hintergrund2" Width="1579" Height="376" Canvas.Left="1899" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="LightGray" Panel.ZIndex="2" >
+            
         </Rectangle>
+
+        <Rectangle x:Name="hintergrundGalaxy1" Width="5000" Height="700" Canvas.Left="0" Canvas.Top="0" >
+            
+        </Rectangle>
+        <Rectangle x:Name="hintergrundGalaxy2" Width="5000" Height="700" Canvas.Left="5000" Canvas.Top="0">
+
+        </Rectangle>
+        <Rectangle x:Name="hintergrundDach1" Width="5000" Height="10" Canvas.Left="0" Canvas.Top="50" Fill="Black" Panel.ZIndex="10">
+            
+        </Rectangle>
+        <Rectangle x:Name="hintergrundDach2" Width="5000" Height="10" Canvas.Left="5000" Canvas.Top="50" Fill="Black" Panel.ZIndex="10">
+
+        </Rectangle>
+        <Rectangle x:Name="hintergrundBoden1" Width="5000" Height="10" Canvas.Left="0" Canvas.Top="436" Fill="Black" Panel.ZIndex="10">
+
+        </Rectangle>
+        <Rectangle x:Name="hintergrundBoden2" Width="5000" Height="10" Canvas.Left="5000" Canvas.Top="436" Fill="Black" Panel.ZIndex="10">
+
+        </Rectangle>
+
 
     </Canvas>
 </Window>
