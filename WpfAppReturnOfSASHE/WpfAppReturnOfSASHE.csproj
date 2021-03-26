@@ -99,9 +99,6 @@
     <Folder Include="Bilder\Hindernis\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Bilder\HintergrundBilder\Raum2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Bilder\HintergrundBilder\Zwischenraum.png" />
   </ItemGroup>
   <ItemGroup>
@@ -111,13 +108,13 @@
     <Resource Include="Bilder\HintergrundBilder\Hintergrund.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Bilder\HintergrundBilder\Raum4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Bilder\HintergrundBilder\Raum3.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Bilder\HintergrundBilder\Decke.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\HintergrundBilder\Raum3erweitert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\HintergrundBilder\HintergrundSpiegel.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

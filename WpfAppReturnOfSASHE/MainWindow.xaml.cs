@@ -22,8 +22,8 @@ namespace WpfAppReturnOfSASHE
     /// </summary>
     public partial class MainWindow : Window
     {
-        int backgroundspeed = 7;
-        int backgroundspeedGalaxy = 10;
+        int backgroundspeed = 5;
+        int backgroundspeedGalaxy = 7;
 
 
         ImageBrush hg1 = new ImageBrush();
@@ -114,12 +114,19 @@ namespace WpfAppReturnOfSASHE
 
         public void HintergrundEinrichten()
         {
+            /*
+             * Hintergrund Einrichten:
+             * - Raumschiffbereich
+             * - Weltall 
+             * - Hindernisse 
+             * 
+             */
             hg1.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/Raum1.png"));
             zwischenraum1.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/Zwischenraum.png"));
-            hg2.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/Raum3.png"));
+            hg2.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/Raum3erweitert.png"));
             zwischenraum2.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/Zwischenraum.png"));
             hgGalaxy1.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/Hintergrund.png"));
-            hgGalaxy2.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/Hintergrund.png"));
+            hgGalaxy2.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/HintergrundSpiegel.png"));
             hgDecke.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/Decke.png"));
 
             hintergrund1.Fill = hg1;
@@ -132,12 +139,6 @@ namespace WpfAppReturnOfSASHE
             hintergrundDach2.Fill = hgDecke;
             hintergrundBoden1.Fill = hgDecke;
             hintergrundBoden2.Fill = hgDecke;
-
-
-
-            
-
-
         }
 
       

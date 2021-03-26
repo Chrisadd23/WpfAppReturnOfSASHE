@@ -10,22 +10,22 @@
     <Canvas Name="myCanvas" Focusable="true" Margin="4,-3,-4,3">
 
         
-        <Rectangle x:Name="hintergrund1" Width="1579" Height="376" Canvas.Left="0" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="DarkGray" Panel.ZIndex="2" >
+        <Rectangle x:Name="hintergrund1" Width="1579" Height="376" Canvas.Left="0" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="DarkGray" Panel.ZIndex="20" >
             
         </Rectangle>
 
         
 
-        <Rectangle x:Name="hintergrundZwischenraum2" Width="480" Height="376" Canvas.Left="3399" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="Gray" Panel.ZIndex="5" >
+        <Rectangle x:Name="hintergrundZwischenraum2" Width="480" Height="376" Canvas.Left="3399" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="Gray" Panel.ZIndex="50" >
 
         </Rectangle>
 
 
-        <Rectangle x:Name="hintergrundZwischenraum1" Width="480" Height="376" Canvas.Left="1509" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="Gray" Panel.ZIndex="5" >
+        <Rectangle x:Name="hintergrundZwischenraum1" Width="480" Height="376" Canvas.Left="1509" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="Gray" Panel.ZIndex="50" >
 
         </Rectangle>
 
-        <Rectangle x:Name="hintergrund2" Width="1579" Height="376" Canvas.Left="1899" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="LightGray" Panel.ZIndex="2" >
+        <Rectangle x:Name="hintergrund2" Width="1579" Height="376" Canvas.Left="1899" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="LightGray" Panel.ZIndex="20" >
             
         </Rectangle>
 
@@ -35,16 +35,16 @@
         <Rectangle x:Name="hintergrundGalaxy2" Width="5000" Height="700" Canvas.Left="5000" Canvas.Top="0">
 
         </Rectangle>
-        <Rectangle x:Name="hintergrundDach1" Width="5000" Height="10" Canvas.Left="0" Canvas.Top="50" Fill="Black" Panel.ZIndex="10">
+        <Rectangle x:Name="hintergrundDach1" Width="5000" Height="10" Canvas.Left="0" Canvas.Top="50" Fill="Black" Panel.ZIndex="80">
             
         </Rectangle>
-        <Rectangle x:Name="hintergrundDach2" Width="5000" Height="10" Canvas.Left="5000" Canvas.Top="50" Fill="Black" Panel.ZIndex="10">
+        <Rectangle x:Name="hintergrundDach2" Width="5000" Height="10" Canvas.Left="5000" Canvas.Top="50" Fill="Black" Panel.ZIndex="80">
 
         </Rectangle>
-        <Rectangle x:Name="hintergrundBoden1" Width="5000" Height="10" Canvas.Left="0" Canvas.Top="436" Fill="Black" Panel.ZIndex="10">
+        <Rectangle x:Name="hintergrundBoden1" Width="5000" Height="10" Canvas.Left="0" Canvas.Top="436" Fill="Black" Panel.ZIndex="80">
 
         </Rectangle>
-        <Rectangle x:Name="hintergrundBoden2" Width="5000" Height="10" Canvas.Left="5000" Canvas.Top="436" Fill="Black" Panel.ZIndex="10">
+        <Rectangle x:Name="hintergrundBoden2" Width="5000" Height="10" Canvas.Left="5000" Canvas.Top="436" Fill="Black" Panel.ZIndex="80">
 
         </Rectangle>
 
