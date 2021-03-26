@@ -102,7 +102,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Bilder\Charakter\" />
     <Folder Include="Bilder\Hindernis\" />
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +121,30 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Bilder\HintergrundBilder\HintergrundSpiegel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\Charakter\newRunner_01.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\Charakter\newRunner_02.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\Charakter\newRunner_03.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\Charakter\newRunner_04.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\Charakter\newRunner_05.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\Charakter\newRunner_06.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\Charakter\newRunner_07.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\Charakter\newRunner_08.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

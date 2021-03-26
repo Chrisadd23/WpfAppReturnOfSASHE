@@ -7,8 +7,15 @@
         mc:Ignorable="d"
         Title="SpielErgebnis" Height="450" Width="800">
 
-    <Canvas Background="#FF232A4B">
-        <Rectangle x:Name="Darstellung1" Width="80"  Height="100"  Canvas.Bottom="30" Canvas.Right="30" Fill="Gray">
+    <Canvas x:Name="canvasSpielstand" >
+        <Canvas.Background>
+            <ImageBrush ImageSource="Bilder\HintergrundBilder\Hintergrund.png"></ImageBrush>
+        </Canvas.Background>
+        
+        <Rectangle x:Name="Darstellung1" RenderTransformOrigin="0.5,0.5"  Width="80"  Height="100"  Canvas.Bottom="30" Canvas.Right="30" Fill="Gray">
+            <Rectangle.RenderTransform>
+                <ScaleTransform ScaleX="-1"></ScaleTransform>
+            </Rectangle.RenderTransform>
         </Rectangle>
         <Rectangle x:Name="Darstellung2" Width="80"  Height="100"  Canvas.Bottom="30" Canvas.Left="30" Fill="Gray">
         </Rectangle>
@@ -29,11 +36,11 @@
             </TextBlock.Effect>
         </TextBlock>
 
-        <TextBlock x:Name="platz1" Canvas.Top="120" Canvas.Left="340" Width="120" Height="40" TextAlignment="Center" FontSize="30" Foreground="#FFA0CF00">Score 1</TextBlock>
-        <TextBlock x:Name="platz2" Canvas.Top="170" Canvas.Left="340" Width="120" Height="30" TextAlignment="Center" FontSize="25" Foreground="Silver">Score 2</TextBlock>
-        <TextBlock x:Name="platz3" Canvas.Top="215" Canvas.Left="340" Width="120" Height="25" TextAlignment="Center" FontSize="20" Foreground="#FF703434">Score 3</TextBlock>
-        <TextBlock x:Name="platz4" Canvas.Top="250" Canvas.Left="340" Width="120" Height="20" TextAlignment="Center" FontSize="15">Score 4</TextBlock>
-        <TextBlock x:Name="platz5" Canvas.Top="275" Canvas.Left="340" Width="120" Height="20" TextAlignment="Center" FontSize="15">Score 5</TextBlock>
+        <TextBlock x:Name="platz1" Canvas.Top="120" Canvas.Left="340" Width="120" Height="40" FontWeight="UltraBold" TextAlignment="Center" FontSize="30" Foreground="#FFA0CF00">Score 1</TextBlock>
+        <TextBlock x:Name="platz2" Canvas.Top="170" Canvas.Left="340" Width="120" Height="30" FontWeight="UltraBold" TextAlignment="Center" FontSize="25" Foreground="Silver">Score 2</TextBlock>
+        <TextBlock x:Name="platz3" Canvas.Top="215" Canvas.Left="340" Width="120" Height="25" FontWeight="UltraBold" TextAlignment="Center" FontSize="20" Foreground="#FF703434">Score 3</TextBlock>
+        <TextBlock x:Name="platz4" Canvas.Top="250" Canvas.Left="340" Width="120" Height="20" FontWeight="UltraBold" TextAlignment="Center" FontSize="15" Foreground="White">Score 4</TextBlock>
+        <TextBlock x:Name="platz5" Canvas.Top="275" Canvas.Left="340" Width="120" Height="20" FontWeight="UltraBold" TextAlignment="Center" FontSize="15" Foreground="White">Score 5</TextBlock>
         <TextBlock></TextBlock>
         
         

@@ -141,8 +141,12 @@ namespace WpfAppReturnOfSASHE
             hintergrundBoden2.Fill = hgDecke;
         }
 
-      
-
-
+        private void OnMyButtonClickResult(object sender, RoutedEventArgs e)
+        {
+            var wnd = new SpielErgebnis();
+            wnd.Show();
+            //wnd.ShowDialog();
+            
+        }
     }
 }
