@@ -1,0 +1,41 @@
+﻿<Window x:Class="WpfAppReturnOfSASHE.SpielErgebnis"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppReturnOfSASHE"
+        mc:Ignorable="d"
+        Title="SpielErgebnis" Height="450" Width="800">
+
+    <Canvas Background="#FF232A4B">
+        <Rectangle x:Name="Darstellung1" Width="80"  Height="100"  Canvas.Bottom="30" Canvas.Right="30" Fill="Gray">
+        </Rectangle>
+        <Rectangle x:Name="Darstellung2" Width="80"  Height="100"  Canvas.Bottom="30" Canvas.Left="30" Fill="Gray">
+        </Rectangle>
+
+        <TextBlock x:Name="titel" TextAlignment="Center"  Canvas.Left="200" Canvas.Top="45" Width="400" Height="70" FontSize="50" FontWeight="UltraBold">
+            <Run Foreground="Red">S</Run>
+            <Run Foreground="OrangeRed">p</Run>
+            <Run Foreground="DarkOrange">i</Run>
+            <Run Foreground="Orange">e</Run>
+            <Run Foreground="Gold">l</Run>
+            <Run Foreground="#FFF0F008">s</Run>
+            <Run Foreground="Gold">t</Run>
+            <Run Foreground="#FFCBB439">a</Run>
+            <Run Foreground="#FF57B00D">n</Run>
+            <Run Foreground="#FF264AEC">d</Run>
+            <TextBlock.Effect>
+                <DropShadowEffect Color="#FF4DA3B6"/>
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <TextBlock x:Name="platz1" Canvas.Top="120" Canvas.Left="340" Width="120" Height="40" TextAlignment="Center" FontSize="30" Foreground="#FFA0CF00">Score 1</TextBlock>
+        <TextBlock x:Name="platz2" Canvas.Top="170" Canvas.Left="340" Width="120" Height="30" TextAlignment="Center" FontSize="25" Foreground="Silver">Score 2</TextBlock>
+        <TextBlock x:Name="platz3" Canvas.Top="215" Canvas.Left="340" Width="120" Height="25" TextAlignment="Center" FontSize="20" Foreground="#FF703434">Score 3</TextBlock>
+        <TextBlock x:Name="platz4" Canvas.Top="250" Canvas.Left="340" Width="120" Height="20" TextAlignment="Center" FontSize="15">Score 4</TextBlock>
+        <TextBlock x:Name="platz5" Canvas.Top="275" Canvas.Left="340" Width="120" Height="20" TextAlignment="Center" FontSize="15">Score 5</TextBlock>
+        <TextBlock></TextBlock>
+        
+        
+    </Canvas>
+</Window>

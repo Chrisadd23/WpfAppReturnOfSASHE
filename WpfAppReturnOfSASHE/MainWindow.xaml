@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppReturnOfSASHE"
         mc:Ignorable="d"
-        Title="Return of SASHE" Height="579.5" Width="800">
+        Title="Return of SASHE" ResizeMode="NoResize" Height="579.5" Width="800">
 
     <Canvas Name="myCanvas" Focusable="true" Margin="4,-3,-4,3">
 
