@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Spieler.cs" />
     <Compile Include="SpielErgebnis.xaml.cs">
       <DependentUpon>SpielErgebnis.xaml</DependentUpon>
     </Compile>

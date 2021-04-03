@@ -39,7 +39,7 @@ namespace WpfAppReturnOfSASHE
             InitializeComponent();
             canvasSpielstand.Focus();
             gameTimer.Tick += CharakterBewegen;
-            gameTimer.Interval = TimeSpan.FromMilliseconds(100);
+            gameTimer.Interval = TimeSpan.FromMilliseconds(80);
             gameTimer.Start();
             
 

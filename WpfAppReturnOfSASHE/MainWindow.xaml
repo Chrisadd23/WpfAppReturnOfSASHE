@@ -10,7 +10,7 @@
     <Canvas Name="myCanvas" Focusable="true" Margin="4,-3,-4,3">
 
 
-        <Rectangle x:Name="hintergrund1" Width="1579" Height="376" Canvas.Left="0" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="DarkGray" Panel.ZIndex="20" >
+        <Rectangle x:Name="hintergrund1" Width="1579" Height="376" Canvas.Left="-2" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="DarkGray" Panel.ZIndex="20" >
 
         </Rectangle>
 
@@ -51,6 +51,7 @@
         <Button x:Name="SpielEnde" Click="OnMyButtonClickResult" Width="20" Height="20" Canvas.Left="10" Panel.ZIndex="100" Canvas.Top="10" RenderTransformOrigin="0.65,0.9" >
             X
         </Button>
+        <Rectangle x:Name="Charakter" Width="80"  Height="100"  Canvas.Left="30" Fill="Gray" Canvas.Top="303" Panel.ZIndex="100"/>
 
 
     </Canvas>
