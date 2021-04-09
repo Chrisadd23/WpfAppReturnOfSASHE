@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,15 +26,13 @@ namespace WpfAppReturnOfSASHE
     {
         DispatcherTimer gameTimer = new DispatcherTimer();
         
-        
+
 
         ImageBrush runner = new ImageBrush();
         ImageBrush runner2 = new ImageBrush();
         int i = 0;
-        
-        
-        
-        
+        private SoundPlayer tplayer;
+
         public SpielErgebnis()
         {
             InitializeComponent();
@@ -45,7 +44,7 @@ namespace WpfAppReturnOfSASHE
 
         }
 
-        private void CharakterBewegen(object sender, EventArgs e)
+    private void CharakterBewegen(object sender, EventArgs e)
         {
             CharakterBewegenErgebnisLinks();
             CharakterBewegenErgebnisRechts();

@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Musik.cs" />
     <Compile Include="Spieler.cs" />
     <Compile Include="SpielErgebnis.xaml.cs">
       <DependentUpon>SpielErgebnis.xaml</DependentUpon>
@@ -106,9 +107,6 @@
     <Folder Include="Bilder\Hindernis\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Bilder\HintergrundBilder\Zwischenraum.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Bilder\HintergrundBilder\Raum1.png" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +144,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Bilder\Charakter\newRunner_08.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\HintergrundBilder\ZwischenraumLinks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\HintergrundBilder\ZwischenraumMitte.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\HintergrundBilder\ZwischenraumRechts.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

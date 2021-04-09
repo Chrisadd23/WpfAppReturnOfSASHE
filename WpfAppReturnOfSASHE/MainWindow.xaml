@@ -14,18 +14,32 @@
 
         </Rectangle>
 
-
-
-        <Rectangle x:Name="hintergrundZwischenraum2" Width="480" Height="376" Canvas.Left="3399" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="Gray" Panel.ZIndex="50" >
+        <Rectangle x:Name="hintergrundZwischenraumLinks1" Width="25" Height="376" Canvas.Left="1509" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="Gray" Panel.ZIndex="120" >
 
         </Rectangle>
 
-
-        <Rectangle x:Name="hintergrundZwischenraum1" Width="480" Height="376" Canvas.Left="1509" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="Gray" Panel.ZIndex="50" >
+        <Rectangle x:Name="hintergrundZwischenraumMitte1" Width="421" Height="376" Canvas.Left="1534" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="Gray" Panel.ZIndex="50" >
 
         </Rectangle>
+
+        <Rectangle x:Name="hintergrundZwischenraumRechts1" Width="34" Height="376" Canvas.Left="1955" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="Gray" Panel.ZIndex="120" >
+
+        </Rectangle>
+
 
         <Rectangle x:Name="hintergrund2" Width="1579" Height="376" Canvas.Left="1899" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="LightGray" Panel.ZIndex="20" >
+
+        </Rectangle>
+
+        <Rectangle x:Name="hintergrundZwischenraumLinks2" Width="25" Height="376" Canvas.Left="3399" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="Gray" Panel.ZIndex="120" >
+
+        </Rectangle>
+
+        <Rectangle x:Name="hintergrundZwischenraumMitte2" Width="421" Height="376" Canvas.Left="3424" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="Gray" Panel.ZIndex="50" >
+
+        </Rectangle>
+
+        <Rectangle x:Name="hintergrundZwischenraumRechts2" Width="34" Height="376" Canvas.Left="3845" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="Gray" Panel.ZIndex="120" >
 
         </Rectangle>
 
