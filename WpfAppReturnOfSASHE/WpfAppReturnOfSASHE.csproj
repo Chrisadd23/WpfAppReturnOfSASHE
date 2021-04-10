@@ -103,9 +103,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Bilder\Hindernis\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Bilder\HintergrundBilder\Raum1.png" />
   </ItemGroup>
@@ -153,6 +151,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Bilder\HintergrundBilder\ZwischenraumRechts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bilder\Hindernis\Gaswolke0.png" />
+    <Resource Include="Bilder\Hindernis\Gaswolke1.png" />
+    <Resource Include="Bilder\Hindernis\Gaswolke2.png" />
+    <Resource Include="Bilder\Hindernis\Gaswolke3.png" />
+    <Resource Include="Bilder\Hindernis\Gaswolke4.png" />
+    <Resource Include="Bilder\Hindernis\Gaswolke5.png" />
+    <Resource Include="Bilder\Hindernis\Gaswolke6.png" />
+    <Resource Include="Bilder\Hindernis\Gaswolke7.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

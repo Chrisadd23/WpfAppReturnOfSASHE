@@ -31,7 +31,7 @@ namespace WpfAppReturnOfSASHE
         ImageBrush runner = new ImageBrush();
         ImageBrush runner2 = new ImageBrush();
         int i = 0;
-        private SoundPlayer tplayer;
+        
 
         public SpielErgebnis()
         {
