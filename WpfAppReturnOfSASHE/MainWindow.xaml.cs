@@ -25,7 +25,7 @@ namespace WpfAppReturnOfSASHE
     {
         int backgroundspeed = 5;
         int backgroundspeedGalaxy = 9;
-        int jumpspeed = 3;
+        int jumpspeed = 6;
         int i;
 
         bool goUp;
@@ -61,6 +61,8 @@ namespace WpfAppReturnOfSASHE
             gameTimer2.Tick += CharakterMovements;
             gameTimer2.Interval = TimeSpan.FromMilliseconds(75);
             gameTimer2.Start();
+
+            charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_02.gif"));
 
             MusikAbspielen();
          
@@ -127,25 +129,32 @@ namespace WpfAppReturnOfSASHE
 
             wnd.Show();
             this.Close();
-            
-            
+
+
         }
-
-
-
-
-
-       
         
         private void moveCharakter(Rectangle charakter)
         {
+            if (Canvas.GetTop(charakter) < 303 && goUp == false )
+            {
+                Canvas.SetTop(charakter, Canvas.GetTop(charakter) + jumpspeed);
+            }
+
+        
             if(goUp == true && Canvas.GetTop(charakter) >= 200 )
             {
                 Canvas.SetTop(charakter, Canvas.GetTop(charakter) - jumpspeed);
-            }   
-            if(goUp == false && Canvas.GetTop(charakter) != 303)
+                charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_02.gif"));
+            }
+            if (goUp == true && Canvas.GetTop(charakter) <= 200)
+            {
+                goUp = false;
+            }
+
+            if (goUp == false && Canvas.GetTop(charakter) < 303)
             {
                 Canvas.SetTop(charakter, Canvas.GetTop(charakter) + jumpspeed);
+                charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_02.gif"));
             }
         }
 
@@ -251,35 +260,37 @@ namespace WpfAppReturnOfSASHE
 
         private void CharakterMovements(object sender, EventArgs e)
         {
-            switch (i)
+            if (goUp == false)
             {
-                case 0:
-                    charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_01.gif"));
+                switch (i)
+                {
+                    case 0:
+                        charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_01.gif"));
 
-                    break;
-                case 1:
-                    charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_02.gif"));
-                    break;
-                case 2:
-                    charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_03.gif"));
-                    break;
-                case 3:
-                    charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_04.gif"));
-                    break;
-                case 4:
-                    charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_05.gif"));
-                    break;
-                case 5:
-                    charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_06.gif"));
-                    break;
-                case 6:
-                    charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_07.gif"));
-                    break;
-                case 7:
-                    charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_08.gif"));
-                    break;
+                        break;
+                    case 1:
+                        charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_02.gif"));
+                        break;
+                    case 2:
+                        charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_03.gif"));
+                        break;
+                    case 3:
+                        charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_04.gif"));
+                        break;
+                    case 4:
+                        charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_05.gif"));
+                        break;
+                    case 5:
+                        charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_06.gif"));
+                        break;
+                    case 6:
+                        charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_07.gif"));
+                        break;
+                    case 7:
+                        charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_08.gif"));
+                        break;
+                }
             }
-
 
             Charakter.Fill = charakterIMG;
             i++;
@@ -291,17 +302,17 @@ namespace WpfAppReturnOfSASHE
 
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space)
-            {
-                goUp = true;
-            }
+           
+  
         }
 
         private void KeyIsUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space)
+            if (e.Key == Key.Space && goUp == false && Canvas.GetTop(Charakter) == 303)
             {
-                goUp = false;
+                goUp = true;
+                
+
             }
         }
     }
