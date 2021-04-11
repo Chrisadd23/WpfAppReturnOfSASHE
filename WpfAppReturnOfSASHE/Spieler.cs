@@ -10,11 +10,15 @@ namespace WpfAppReturnOfSASHE
     {
         private string name;
         private int score;
+        private DateTime spielStart;
 
 
         public Spieler()
         {
-
+            spielStart = DateTime.Now;
         }
+
+        public string Name { get => name; set => name = value; }
+        public int Score { get => score; set => score = value; }
     }
 }

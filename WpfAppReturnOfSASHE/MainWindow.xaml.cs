@@ -144,7 +144,7 @@ namespace WpfAppReturnOfSASHE
             if(goUp == true && Canvas.GetTop(charakter) >= 200 )
             {
                 Canvas.SetTop(charakter, Canvas.GetTop(charakter) - jumpspeed);
-                charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_02.gif"));
+                
             }
             if (goUp == true && Canvas.GetTop(charakter) <= 200)
             {
@@ -311,7 +311,7 @@ namespace WpfAppReturnOfSASHE
             if (e.Key == Key.Space && goUp == false && Canvas.GetTop(Charakter) == 303)
             {
                 goUp = true;
-                
+                charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_02.gif"));
 
             }
         }
