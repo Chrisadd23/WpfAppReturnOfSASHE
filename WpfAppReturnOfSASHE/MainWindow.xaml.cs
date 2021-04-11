@@ -25,7 +25,10 @@ namespace WpfAppReturnOfSASHE
     {
         int backgroundspeed = 5;
         int backgroundspeedGalaxy = 9;
+        int jumpspeed = 3;
         int i;
+
+        bool goUp;
 
 
         ImageBrush hg1 = new ImageBrush();
@@ -55,8 +58,8 @@ namespace WpfAppReturnOfSASHE
             gameTimer.Interval = TimeSpan.FromMilliseconds(20);
             gameTimer.Start();
 
-            gameTimer2.Tick += moveCharakter;
-            gameTimer2.Interval = TimeSpan.FromMilliseconds(70);
+            gameTimer2.Tick += CharakterMovements;
+            gameTimer2.Interval = TimeSpan.FromMilliseconds(75);
             gameTimer2.Start();
 
             MusikAbspielen();
@@ -129,9 +132,28 @@ namespace WpfAppReturnOfSASHE
         }
 
 
+
+
+
+       
+        
+        private void moveCharakter(Rectangle charakter)
+        {
+            if(goUp == true && Canvas.GetTop(charakter) >= 200 )
+            {
+                Canvas.SetTop(charakter, Canvas.GetTop(charakter) - jumpspeed);
+            }   
+            if(goUp == false && Canvas.GetTop(charakter) != 303)
+            {
+                Canvas.SetTop(charakter, Canvas.GetTop(charakter) + jumpspeed);
+            }
+        }
+
+
         private void startEvents(object sender, EventArgs e)
         { 
             MoveHintergrund(hintergrund1, hintergrund2, hintergrundZwischenraumLinks1, hintergrundZwischenraumMitte1, hintergrundZwischenraumRechts1,hintergrundZwischenraumLinks2, hintergrundZwischenraumMitte2, hintergrundZwischenraumRechts2 , hintergrundDach1, hintergrundDach2, hintergrundBoden1, hintergrundBoden2, hintergrundGalaxy1, hintergrundGalaxy2, backgroundspeed, backgroundspeedGalaxy);
+            moveCharakter(Charakter);
         }
 
         private void MoveHintergrund(Rectangle hintergrund1, Rectangle hintergrund2, Rectangle hintergrundZwischenraumLinks1, Rectangle hintergrundZwischenraumMitte1, Rectangle hintergrundZwischenraumRechts1, Rectangle hintergrundZwischenraumLinks2, Rectangle hintergrundZwischenraumMitte2, Rectangle hintergrundZwischenraumRechts2, Rectangle hintergrundDach1, Rectangle hintergrundDach2, Rectangle hintergrundBoden1, Rectangle hintergrundBoden2, Rectangle hintergrundGalaxy1, Rectangle hintergrundGalaxy2, int backgroundspeed, int backgroundspeedGalaxy)
@@ -221,9 +243,13 @@ namespace WpfAppReturnOfSASHE
             {
                 Canvas.SetLeft(hintergrundBoden2, Canvas.GetLeft(hintergrundBoden1) + hintergrundBoden1.Width);
             }
+
+
+
+
         }
 
-        private void moveCharakter(object sender, EventArgs e)
+        private void CharakterMovements(object sender, EventArgs e)
         {
             switch (i)
             {
@@ -260,6 +286,22 @@ namespace WpfAppReturnOfSASHE
             if (i > 7)
             {
                 i = 0;
+            }
+        }
+
+        private void KeyIsDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                goUp = true;
+            }
+        }
+
+        private void KeyIsUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                goUp = false;
             }
         }
     }

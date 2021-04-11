@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Return of SASHE" ResizeMode="NoResize" Height="579.5" Width="800">
 
-    <Canvas Name="myCanvas" Focusable="true" Margin="4,-3,-4,3">
+    <Canvas Name="myCanvas" Focusable="true" Margin="4,-3,-4,3"  KeyDown="KeyIsDown" KeyUp="KeyIsUp">
 
 
         <Rectangle x:Name="hintergrund1" Width="1579" Height="376" Canvas.Left="-2" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="DarkGray" Panel.ZIndex="20" >
@@ -43,10 +43,10 @@
 
         </Rectangle>
 
-        <Rectangle x:Name="hintergrundGalaxy1" Width="5000" Height="700" Canvas.Left="0" Canvas.Top="0" >
+        <Rectangle x:Name="hintergrundGalaxy1" Width="5000" Height="600" Canvas.Left="0" Canvas.Top="0" >
 
         </Rectangle>
-        <Rectangle x:Name="hintergrundGalaxy2" Width="5000" Height="700" Canvas.Left="5000" Canvas.Top="0">
+        <Rectangle x:Name="hintergrundGalaxy2" Width="5000" Height="600" Canvas.Left="5000" Canvas.Top="0">
 
         </Rectangle>
         <Rectangle x:Name="hintergrundDach1" Width="5000" Height="10" Canvas.Left="0" Canvas.Top="50" Fill="Black" Panel.ZIndex="80">
