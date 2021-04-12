@@ -25,8 +25,9 @@ namespace WpfAppReturnOfSASHE
     {
         int backgroundspeed = 5;
         int backgroundspeedGalaxy = 9;
-        int jumpspeed = 6;
+        int jumpspeed = 5;
         int i;
+        int x;
 
         bool goUp;
 
@@ -39,6 +40,8 @@ namespace WpfAppReturnOfSASHE
 
         ImageBrush charakterIMG = new ImageBrush();
 
+        ImageBrush hindernisIMG = new ImageBrush();
+
         ImageBrush zwischenraumLinks = new ImageBrush();
         ImageBrush zwischenraumMitte = new ImageBrush();
         ImageBrush zwischenraumRechts = new ImageBrush();
@@ -46,8 +49,9 @@ namespace WpfAppReturnOfSASHE
 
         DispatcherTimer gameTimer = new DispatcherTimer();
         DispatcherTimer gameTimer2 = new DispatcherTimer();
+        DispatcherTimer gameTimer3 = new DispatcherTimer();
 
-        SoundPlayer splayer;
+        private SoundPlayer splayer;
 
         public MainWindow()
         {
@@ -58,22 +62,20 @@ namespace WpfAppReturnOfSASHE
             gameTimer.Interval = TimeSpan.FromMilliseconds(20);
             gameTimer.Start();
 
-            gameTimer2.Tick += CharakterMovements;
+            gameTimer2.Tick += AnimateCharakter;
             gameTimer2.Interval = TimeSpan.FromMilliseconds(75);
             gameTimer2.Start();
 
+            gameTimer3.Tick += HindernisMovements;
+            gameTimer3.Interval = TimeSpan.FromMilliseconds(100);
+            gameTimer3.Start();
+
             charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_02.gif"));
+            hindernisIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Hindernis/Gaswolke7.png"));
 
             MusikAbspielen();
          
         }
-
-        private void MusikAbspielen()
-        {
-            splayer = new SoundPlayer("Musik\\JumpAndRun\\ReturnOfSASHEMusik1.wav");
-            splayer.Play();
-        }
-
 
         public void HintergrundEinrichten()
         {
@@ -84,22 +86,22 @@ namespace WpfAppReturnOfSASHE
              * - Hindernisse 
              * 
              */
-            hg1.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/Raum1.png")); 
+            hg1.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/Raum1.png"));
             hg2.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/Raum3erweitert.png"));
-            
+
 
             zwischenraumLinks.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/ZwischenraumLinks.png"));
             zwischenraumMitte.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/ZwischenraumMitte.png"));
             zwischenraumRechts.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/ZwischenraumRechts.png"));
 
 
-            
+
 
             hgGalaxy1.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/Hintergrund.png"));
             hgGalaxy2.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/HintergrundSpiegel.png"));
             hgDecke.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/HintergrundBilder/Decke.png"));
 
-            hintergrund1.Fill = hg1; 
+            hintergrund1.Fill = hg1;
             hintergrund2.Fill = hg2;
 
             hintergrundGalaxy1.Fill = hgGalaxy1;
@@ -119,12 +121,18 @@ namespace WpfAppReturnOfSASHE
         }
 
 
+        private void MusikAbspielen()
+        {
+            splayer = new SoundPlayer("Musik\\JumpAndRun\\ReturnOfSASHEMusik1.wav");
+            splayer.Play();
+        }
 
         private void OnMyButtonClickResult(object sender, RoutedEventArgs e)
         {
             var wnd = new SpielErgebnis();
             gameTimer.Stop();
             gameTimer2.Stop();
+            gameTimer3.Stop();
             splayer.Stop();
 
             wnd.Show();
@@ -132,6 +140,125 @@ namespace WpfAppReturnOfSASHE
 
 
         }
+
+        private void startEvents(object sender, EventArgs e)
+        {
+            MoveHintergrund(hintergrund1, hintergrund2, hintergrundZwischenraumLinks1, hintergrundZwischenraumMitte1, hintergrundZwischenraumRechts1, hintergrundZwischenraumLinks2, hintergrundZwischenraumMitte2, hintergrundZwischenraumRechts2, hintergrundDach1, hintergrundDach2, hintergrundBoden1, hintergrundBoden2, hintergrundGalaxy1, hintergrundGalaxy2, backgroundspeed, backgroundspeedGalaxy);
+            moveCharakter(Charakter);
+            moveHindernis(Hindernis1,Hindernis2);
+        }
+
+        private void HindernisMovements(object sender, EventArgs e)
+        {
+            animateHinderniss(Hindernis1,Hindernis2);
+        }
+
+        private void MoveHintergrund(Rectangle hintergrund1, Rectangle hintergrund2, Rectangle hintergrundZwischenraumLinks1, Rectangle hintergrundZwischenraumMitte1, Rectangle hintergrundZwischenraumRechts1, Rectangle hintergrundZwischenraumLinks2, Rectangle hintergrundZwischenraumMitte2, Rectangle hintergrundZwischenraumRechts2, Rectangle hintergrundDach1, Rectangle hintergrundDach2, Rectangle hintergrundBoden1, Rectangle hintergrundBoden2, Rectangle hintergrundGalaxy1, Rectangle hintergrundGalaxy2, int backgroundspeed, int backgroundspeedGalaxy)
+        {
+            /*Zu Beginn  hat das Element hintergrund1 (mit dem Bild Raum1.png) das Attribut Canvas.Left="-289" sobald
+         * die Elemente die für das Raumschiff stehen nicht mehr in der Benutzerfläche gesehen werden, werden sie nach 
+         * einer bestimmten Reihenfolge and das Ende gehängt.
+         * 
+         */
+
+
+            Canvas.SetLeft(hintergrund1, Canvas.GetLeft(hintergrund1) - backgroundspeed);
+            Canvas.SetLeft(hintergrund2, Canvas.GetLeft(hintergrund2) - backgroundspeed);
+
+            Canvas.SetLeft(hintergrundDach1, Canvas.GetLeft(hintergrundDach1) - backgroundspeed);
+            Canvas.SetLeft(hintergrundDach2, Canvas.GetLeft(hintergrundDach2) - backgroundspeed);
+            Canvas.SetLeft(hintergrundBoden1, Canvas.GetLeft(hintergrundBoden1) - backgroundspeed);
+            Canvas.SetLeft(hintergrundBoden2, Canvas.GetLeft(hintergrundBoden2) - backgroundspeed);
+
+            Canvas.SetLeft(hintergrundZwischenraumLinks1, Canvas.GetLeft(hintergrundZwischenraumLinks1) - backgroundspeed);
+            Canvas.SetLeft(hintergrundZwischenraumMitte1, Canvas.GetLeft(hintergrundZwischenraumMitte1) - backgroundspeed);
+            Canvas.SetLeft(hintergrundZwischenraumRechts1, Canvas.GetLeft(hintergrundZwischenraumRechts1) - backgroundspeed);
+
+            Canvas.SetLeft(hintergrundZwischenraumLinks2, Canvas.GetLeft(hintergrundZwischenraumLinks2) - backgroundspeed);
+            Canvas.SetLeft(hintergrundZwischenraumMitte2, Canvas.GetLeft(hintergrundZwischenraumMitte2) - backgroundspeed);
+            Canvas.SetLeft(hintergrundZwischenraumRechts2, Canvas.GetLeft(hintergrundZwischenraumRechts2) - backgroundspeed);
+
+            Canvas.SetLeft(hintergrundGalaxy1, Canvas.GetLeft(hintergrundGalaxy1) - backgroundspeedGalaxy);
+            Canvas.SetLeft(hintergrundGalaxy2, Canvas.GetLeft(hintergrundGalaxy2) - backgroundspeedGalaxy);
+
+
+            if (Canvas.GetLeft(hintergrund1) < -1579)
+            {
+                Canvas.SetLeft(hintergrund1, Canvas.GetLeft(hintergrundZwischenraumRechts2) + hintergrundZwischenraumRechts2.Width - 80);
+            }
+            if (Canvas.GetLeft(hintergrundZwischenraumLinks1) < -25 - 5)
+            {
+                Canvas.SetLeft(hintergrundZwischenraumLinks1, Canvas.GetLeft(hintergrund1) + hintergrund1.Width - 80);
+            }
+            if (Canvas.GetLeft(hintergrundZwischenraumMitte1) < -421 - 5)
+            {
+                Canvas.SetLeft(hintergrundZwischenraumMitte1, Canvas.GetLeft(hintergrundZwischenraumLinks1) + hintergrundZwischenraumLinks1.Width);
+            }
+            if (Canvas.GetLeft(hintergrundZwischenraumRechts1) < -34 - 5)
+            {
+                Canvas.SetLeft(hintergrundZwischenraumRechts1, Canvas.GetLeft(hintergrundZwischenraumMitte1) + hintergrundZwischenraumMitte1.Width);
+            }
+
+            if (Canvas.GetLeft(hintergrund2) < -1579)
+            {
+                Canvas.SetLeft(hintergrund2, Canvas.GetLeft(hintergrundZwischenraumRechts1) + hintergrundZwischenraumRechts1.Width - 80);
+            }
+            if (Canvas.GetLeft(hintergrundZwischenraumLinks2) < -25 - 5)
+            {
+                Canvas.SetLeft(hintergrundZwischenraumLinks2, Canvas.GetLeft(hintergrund2) + hintergrund2.Width - 80);
+            }
+            if (Canvas.GetLeft(hintergrundZwischenraumMitte2) < -421 - 5)
+            {
+                Canvas.SetLeft(hintergrundZwischenraumMitte2, Canvas.GetLeft(hintergrundZwischenraumLinks2) + hintergrundZwischenraumLinks2.Width);
+            }
+            if (Canvas.GetLeft(hintergrundZwischenraumRechts2) < -34 - 5)
+            {
+                Canvas.SetLeft(hintergrundZwischenraumRechts2, Canvas.GetLeft(hintergrundZwischenraumMitte2) + hintergrundZwischenraumMitte2.Width);
+            }
+
+            if (Canvas.GetLeft(hintergrundGalaxy1) < -5000)
+            {
+                Canvas.SetLeft(hintergrundGalaxy1, Canvas.GetLeft(hintergrundGalaxy2) + hintergrundGalaxy2.Width);
+            }
+            if (Canvas.GetLeft(hintergrundGalaxy2) < -5000)
+            {
+                Canvas.SetLeft(hintergrundGalaxy2, Canvas.GetLeft(hintergrundGalaxy1) + hintergrundGalaxy1.Width);
+            }
+            if (Canvas.GetLeft(hintergrundDach1) < -5000)
+            {
+                Canvas.SetLeft(hintergrundDach1, Canvas.GetLeft(hintergrundDach2) + hintergrundDach2.Width);
+            }
+            if (Canvas.GetLeft(hintergrundDach2) < -5000)
+            {
+                Canvas.SetLeft(hintergrundDach2, Canvas.GetLeft(hintergrundDach1) + hintergrundDach1.Width);
+            }
+            if (Canvas.GetLeft(hintergrundBoden1) < -5000)
+            {
+                Canvas.SetLeft(hintergrundBoden1, Canvas.GetLeft(hintergrundBoden2) + hintergrundBoden2.Width);
+            }
+            if (Canvas.GetLeft(hintergrundBoden2) < -5000)
+            {
+                Canvas.SetLeft(hintergrundBoden2, Canvas.GetLeft(hintergrundBoden1) + hintergrundBoden1.Width);
+            }
+
+        }
+
+        private void moveHindernis(Rectangle hindernis1, Rectangle hindernis2)
+        {
+            Canvas.SetLeft(hindernis1, Canvas.GetLeft(hindernis1) - backgroundspeed);
+            Canvas.SetLeft(hindernis2, Canvas.GetLeft(hindernis2) - backgroundspeed);
+
+            if (Canvas.GetLeft(hindernis1) < -60)
+            {
+                Canvas.SetLeft(hindernis1, 700);
+            }
+            if(Canvas.GetLeft(hindernis2) < -90)
+            {
+                    Canvas.SetLeft(hindernis2, Canvas.GetLeft(hindernis1) + 250);
+            }
+        }
+
+       
         
         private void moveCharakter(Rectangle charakter)
         {
@@ -159,106 +286,51 @@ namespace WpfAppReturnOfSASHE
         }
 
 
-        private void startEvents(object sender, EventArgs e)
-        { 
-            MoveHintergrund(hintergrund1, hintergrund2, hintergrundZwischenraumLinks1, hintergrundZwischenraumMitte1, hintergrundZwischenraumRechts1,hintergrundZwischenraumLinks2, hintergrundZwischenraumMitte2, hintergrundZwischenraumRechts2 , hintergrundDach1, hintergrundDach2, hintergrundBoden1, hintergrundBoden2, hintergrundGalaxy1, hintergrundGalaxy2, backgroundspeed, backgroundspeedGalaxy);
-            moveCharakter(Charakter);
-        }
+        
 
-        private void MoveHintergrund(Rectangle hintergrund1, Rectangle hintergrund2, Rectangle hintergrundZwischenraumLinks1, Rectangle hintergrundZwischenraumMitte1, Rectangle hintergrundZwischenraumRechts1, Rectangle hintergrundZwischenraumLinks2, Rectangle hintergrundZwischenraumMitte2, Rectangle hintergrundZwischenraumRechts2, Rectangle hintergrundDach1, Rectangle hintergrundDach2, Rectangle hintergrundBoden1, Rectangle hintergrundBoden2, Rectangle hintergrundGalaxy1, Rectangle hintergrundGalaxy2, int backgroundspeed, int backgroundspeedGalaxy)
+        private void animateHinderniss(Rectangle hindernis1,Rectangle hindernis2)
         {
-            /*Zu Beginn  hat das Element hintergrund1 (mit dem Bild Raum1.png) das Attribut Canvas.Left="-289" sobald
-         * die Elemente die für das Raumschiff stehen nicht mehr in der Benutzerfläche gesehen werden, werden sie nach 
-         * einer bestimmten Reihenfolge and das Ende gehängt.
-         * 
-         */
+            switch (x)
+            {
+                case 0:
+                    hindernisIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Hindernis/Gaswolke0.png"));
 
-
-            Canvas.SetLeft(hintergrund1, Canvas.GetLeft(hintergrund1) - backgroundspeed);
-            Canvas.SetLeft(hintergrund2, Canvas.GetLeft(hintergrund2) - backgroundspeed);
-            
-            Canvas.SetLeft(hintergrundDach1, Canvas.GetLeft(hintergrundDach1) - backgroundspeed);
-            Canvas.SetLeft(hintergrundDach2, Canvas.GetLeft(hintergrundDach2) - backgroundspeed);
-            Canvas.SetLeft(hintergrundBoden1, Canvas.GetLeft(hintergrundBoden1) - backgroundspeed);
-            Canvas.SetLeft(hintergrundBoden2, Canvas.GetLeft(hintergrundBoden2) - backgroundspeed);
-            
-            Canvas.SetLeft(hintergrundZwischenraumLinks1, Canvas.GetLeft(hintergrundZwischenraumLinks1) - backgroundspeed);
-            Canvas.SetLeft(hintergrundZwischenraumMitte1, Canvas.GetLeft(hintergrundZwischenraumMitte1) - backgroundspeed);
-            Canvas.SetLeft(hintergrundZwischenraumRechts1, Canvas.GetLeft(hintergrundZwischenraumRechts1) - backgroundspeed);
-
-            Canvas.SetLeft(hintergrundZwischenraumLinks2, Canvas.GetLeft(hintergrundZwischenraumLinks2) - backgroundspeed);
-            Canvas.SetLeft(hintergrundZwischenraumMitte2, Canvas.GetLeft(hintergrundZwischenraumMitte2) - backgroundspeed);
-            Canvas.SetLeft(hintergrundZwischenraumRechts2, Canvas.GetLeft(hintergrundZwischenraumRechts2) - backgroundspeed);
-
-            Canvas.SetLeft(hintergrundGalaxy1, Canvas.GetLeft(hintergrundGalaxy1) - backgroundspeedGalaxy);
-            Canvas.SetLeft(hintergrundGalaxy2, Canvas.GetLeft(hintergrundGalaxy2) - backgroundspeedGalaxy);
-
-
-            if (Canvas.GetLeft(hintergrund1) < -1579)
-            {
-                Canvas.SetLeft(hintergrund1, Canvas.GetLeft(hintergrundZwischenraumRechts2) + hintergrundZwischenraumRechts2.Width - 80);
-            }
-            if(Canvas.GetLeft(hintergrundZwischenraumLinks1) < -25-5)
-            {
-                Canvas.SetLeft(hintergrundZwischenraumLinks1, Canvas.GetLeft(hintergrund1) + hintergrund1.Width -80);
-            }
-            if(Canvas.GetLeft(hintergrundZwischenraumMitte1) < -421-5)
-            {
-                Canvas.SetLeft(hintergrundZwischenraumMitte1, Canvas.GetLeft(hintergrundZwischenraumLinks1) + hintergrundZwischenraumLinks1.Width);
-            }
-            if(Canvas.GetLeft(hintergrundZwischenraumRechts1) < -34-5)
-            {
-                Canvas.SetLeft(hintergrundZwischenraumRechts1, Canvas.GetLeft(hintergrundZwischenraumMitte1) + hintergrundZwischenraumMitte1.Width);
-            }
-         
-            if (Canvas.GetLeft(hintergrund2) < -1579)
-            {
-                Canvas.SetLeft(hintergrund2, Canvas.GetLeft(hintergrundZwischenraumRechts1) + hintergrundZwischenraumRechts1.Width - 80);
-            }
-            if (Canvas.GetLeft(hintergrundZwischenraumLinks2) < -25-5)
-            {
-                Canvas.SetLeft(hintergrundZwischenraumLinks2, Canvas.GetLeft(hintergrund2) + hintergrund2.Width - 80);
-            }
-            if(Canvas.GetLeft(hintergrundZwischenraumMitte2) < -421-5)
-            {
-                Canvas.SetLeft(hintergrundZwischenraumMitte2, Canvas.GetLeft(hintergrundZwischenraumLinks2) + hintergrundZwischenraumLinks2.Width);
-            }
-            if(Canvas.GetLeft(hintergrundZwischenraumRechts2) < - 34-5)
-            {
-                Canvas.SetLeft(hintergrundZwischenraumRechts2, Canvas.GetLeft(hintergrundZwischenraumMitte2) + hintergrundZwischenraumMitte2.Width);
+                    break;
+                case 1:
+                    hindernisIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Hindernis/Gaswolke1.png"));
+                    break;
+                case 2:
+                    hindernisIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Hindernis/Gaswolke2.png"));
+                    break;
+                case 3:
+                    hindernisIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Hindernis/Gaswolke3.png"));
+                    break;
+                case 4:
+                    hindernisIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Hindernis/Gaswolke4.png"));
+                    break;
+                case 5:
+                    hindernisIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Hindernis/Gaswolke5.png"));
+                    break;
+                case 6:
+                    hindernisIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Hindernis/Gaswolke6.png"));
+                    break;
+                case 7:
+                    hindernisIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Hindernis/Gaswolke7.png"));
+                    break;
             }
 
-            if (Canvas.GetLeft(hintergrundGalaxy1) < -5000)
-            {
-                Canvas.SetLeft(hintergrundGalaxy1, Canvas.GetLeft(hintergrundGalaxy2) + hintergrundGalaxy2.Width);
-            }
-            if (Canvas.GetLeft(hintergrundGalaxy2) < -5000)
-            {
-                Canvas.SetLeft(hintergrundGalaxy2, Canvas.GetLeft(hintergrundGalaxy1) + hintergrundGalaxy1.Width );
-            }
-            if (Canvas.GetLeft(hintergrundDach1) < -5000)
-            {
-                Canvas.SetLeft(hintergrundDach1, Canvas.GetLeft(hintergrundDach2) + hintergrundDach2.Width);
-            }
-            if (Canvas.GetLeft(hintergrundDach2) < -5000)
-            {
-                Canvas.SetLeft(hintergrundDach2, Canvas.GetLeft(hintergrundDach1) + hintergrundDach1.Width);
-            }
-            if (Canvas.GetLeft(hintergrundBoden1) < -5000)
-            {
-                Canvas.SetLeft(hintergrundBoden1, Canvas.GetLeft(hintergrundBoden2) + hintergrundBoden2.Width);
-            }
-            if (Canvas.GetLeft(hintergrundBoden2) < -5000)
-            {
-                Canvas.SetLeft(hintergrundBoden2, Canvas.GetLeft(hintergrundBoden1) + hintergrundBoden1.Width);
-            }
+            hindernis1.Fill = hindernisIMG;
+            hindernis2.Fill = hindernisIMG;
 
-
-
-
+            x++;
+            if (x > 7)
+            {
+                x = 0;
+            }
         }
 
-        private void CharakterMovements(object sender, EventArgs e)
+
+        private void AnimateCharakter(object sender, EventArgs e)
         {
             if (goUp == false)
             {

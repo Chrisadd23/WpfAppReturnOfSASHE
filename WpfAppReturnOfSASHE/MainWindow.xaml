@@ -67,6 +67,9 @@
         </Button>
         <Rectangle x:Name="Charakter" Width="80"  Height="100"  Canvas.Left="30" Fill="Gray" Canvas.Top="303" Panel.ZIndex="100"/>
 
+        <Rectangle x:Name="Hindernis1" Width="54"  Height="54"  Canvas.Left="1154" Fill="Red" Canvas.Top="349" Panel.ZIndex="100"/>
+        <Rectangle x:Name="Hindernis2" Width="54"  Height="54"  Canvas.Left="1689" Fill="Red" Canvas.Top="349" Panel.ZIndex="100"/>
+
 
     </Canvas>
 </Window>

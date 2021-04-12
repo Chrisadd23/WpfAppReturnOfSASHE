@@ -31,7 +31,7 @@ namespace WpfAppReturnOfSASHE
         ImageBrush runner = new ImageBrush();
         ImageBrush runner2 = new ImageBrush();
         int i = 0;
-        
+        private SoundPlayer splayer;
 
         public SpielErgebnis()
         {
@@ -40,11 +40,10 @@ namespace WpfAppReturnOfSASHE
             gameTimer.Tick += CharakterBewegen;
             gameTimer.Interval = TimeSpan.FromMilliseconds(80);
             gameTimer.Start();
-            
-
+   
         }
 
-    private void CharakterBewegen(object sender, EventArgs e)
+        private void CharakterBewegen(object sender, EventArgs e)
         {
             CharakterBewegenErgebnisLinks();
             CharakterBewegenErgebnisRechts();
