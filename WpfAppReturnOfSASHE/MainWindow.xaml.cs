@@ -25,11 +25,19 @@ namespace WpfAppReturnOfSASHE
     {
         int backgroundspeed = 5;
         int backgroundspeedGalaxy = 9;
-        int jumpspeed = 5;
+        int jumpspeed = 9;
+        int hindernisspeed = 10;
         int i;
         int x;
 
         bool goUp;
+
+        Random platziereHinderniss = new Random();
+
+        Rect hindernis1Box;
+        Rect hindernis2Box;
+        Rect hindernis3Box;
+        Rect charakterBox;
 
 
         ImageBrush hg1 = new ImageBrush();
@@ -51,6 +59,7 @@ namespace WpfAppReturnOfSASHE
         DispatcherTimer gameTimer2 = new DispatcherTimer();
         DispatcherTimer gameTimer3 = new DispatcherTimer();
 
+
         private SoundPlayer splayer;
 
         public MainWindow()
@@ -67,7 +76,7 @@ namespace WpfAppReturnOfSASHE
             gameTimer2.Start();
 
             gameTimer3.Tick += HindernisMovements;
-            gameTimer3.Interval = TimeSpan.FromMilliseconds(100);
+            gameTimer3.Interval = TimeSpan.FromMilliseconds(150);
             gameTimer3.Start();
 
             charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_02.gif"));
@@ -123,34 +132,25 @@ namespace WpfAppReturnOfSASHE
 
         private void MusikAbspielen()
         {
-            splayer = new SoundPlayer("Musik\\JumpAndRun\\ReturnOfSASHEMusik1.wav");
+            splayer = new SoundPlayer("Musik\\JumpAndRun\\ReturnOfSASHEMusik.wav");
             splayer.Play();
         }
 
         private void OnMyButtonClickResult(object sender, RoutedEventArgs e)
         {
-            var wnd = new SpielErgebnis();
-            gameTimer.Stop();
-            gameTimer2.Stop();
-            gameTimer3.Stop();
-            splayer.Stop();
-
-            wnd.Show();
-            this.Close();
-
-
+            stopGame();
         }
 
         private void startEvents(object sender, EventArgs e)
         {
             MoveHintergrund(hintergrund1, hintergrund2, hintergrundZwischenraumLinks1, hintergrundZwischenraumMitte1, hintergrundZwischenraumRechts1, hintergrundZwischenraumLinks2, hintergrundZwischenraumMitte2, hintergrundZwischenraumRechts2, hintergrundDach1, hintergrundDach2, hintergrundBoden1, hintergrundBoden2, hintergrundGalaxy1, hintergrundGalaxy2, backgroundspeed, backgroundspeedGalaxy);
-            moveCharakter(Charakter);
-            moveHindernis(Hindernis1,Hindernis2);
+            moveCharakter(Charakter,Hindernis1,Hindernis2,Hindernis3);
+            moveHindernis(Hindernis1,Hindernis2,Hindernis3);
         }
 
         private void HindernisMovements(object sender, EventArgs e)
         {
-            animateHinderniss(Hindernis1,Hindernis2);
+            animateHinderniss(Hindernis1,Hindernis2,Hindernis3);
         }
 
         private void MoveHintergrund(Rectangle hintergrund1, Rectangle hintergrund2, Rectangle hintergrundZwischenraumLinks1, Rectangle hintergrundZwischenraumMitte1, Rectangle hintergrundZwischenraumRechts1, Rectangle hintergrundZwischenraumLinks2, Rectangle hintergrundZwischenraumMitte2, Rectangle hintergrundZwischenraumRechts2, Rectangle hintergrundDach1, Rectangle hintergrundDach2, Rectangle hintergrundBoden1, Rectangle hintergrundBoden2, Rectangle hintergrundGalaxy1, Rectangle hintergrundGalaxy2, int backgroundspeed, int backgroundspeedGalaxy)
@@ -243,24 +243,28 @@ namespace WpfAppReturnOfSASHE
 
         }
 
-        private void moveHindernis(Rectangle hindernis1, Rectangle hindernis2)
+        private void moveHindernis(Rectangle hindernis1, Rectangle hindernis2,Rectangle hindernis3)
         {
-            Canvas.SetLeft(hindernis1, Canvas.GetLeft(hindernis1) - backgroundspeed);
-            Canvas.SetLeft(hindernis2, Canvas.GetLeft(hindernis2) - backgroundspeed);
+            Canvas.SetLeft(hindernis1, Canvas.GetLeft(hindernis1) - hindernisspeed);
+            Canvas.SetLeft(hindernis2, Canvas.GetLeft(hindernis2) - hindernisspeed);
 
             if (Canvas.GetLeft(hindernis1) < -60)
             {
-                Canvas.SetLeft(hindernis1, 700);
+                Canvas.SetLeft(hindernis1, 900);
             }
-            if(Canvas.GetLeft(hindernis2) < -90)
+            if(Canvas.GetLeft(hindernis2) < -60)
             {
-                    Canvas.SetLeft(hindernis2, Canvas.GetLeft(hindernis1) + 250);
+                    Canvas.SetLeft(hindernis2, Canvas.GetLeft(hindernis1) + platziereHinderniss.Next(250,450));
+            }
+            if(Canvas.GetLeft(hindernis3) <-60)
+            {
+                    Canvas.SetLeft(hindernis3, Canvas.GetLeft(hindernis2) + platziereHinderniss.Next(250, 450));
             }
         }
 
        
         
-        private void moveCharakter(Rectangle charakter)
+        private void moveCharakter(Rectangle charakter,Rectangle hindernis1, Rectangle hindernis2, Rectangle hindernis3)
         {
             if (Canvas.GetTop(charakter) < 303 && goUp == false )
             {
@@ -268,12 +272,12 @@ namespace WpfAppReturnOfSASHE
             }
 
         
-            if(goUp == true && Canvas.GetTop(charakter) >= 200 )
+            if(goUp == true && Canvas.GetTop(charakter) >= 150 )
             {
                 Canvas.SetTop(charakter, Canvas.GetTop(charakter) - jumpspeed);
                 
             }
-            if (goUp == true && Canvas.GetTop(charakter) <= 200)
+            if (goUp == true && Canvas.GetTop(charakter) <= 150)
             {
                 goUp = false;
             }
@@ -283,12 +287,32 @@ namespace WpfAppReturnOfSASHE
                 Canvas.SetTop(charakter, Canvas.GetTop(charakter) + jumpspeed);
                 charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_02.gif"));
             }
+
+            charakterBox = new Rect(Canvas.GetLeft(charakter), Canvas.GetTop(charakter), charakter.Width - 50, charakter.Height - 50);
+            hindernis1Box = new Rect(Canvas.GetLeft(hindernis1), Canvas.GetTop(hindernis1), hindernis1.Width, hindernis1.Height);
+            hindernis2Box = new Rect(Canvas.GetLeft(hindernis2), Canvas.GetTop(hindernis2), hindernis2.Width, hindernis2.Height);
+            hindernis3Box = new Rect(Canvas.GetLeft(hindernis3), Canvas.GetTop(hindernis3), hindernis3.Width, hindernis3.Height);
+
+            if(charakterBox.IntersectsWith(hindernis1Box) || charakterBox.IntersectsWith(hindernis2Box) || charakterBox.IntersectsWith(hindernis3Box))
+            {
+                stopGame();
+            }
+
         }
 
+        private void stopGame()
+        {
+            var wnd = new SpielErgebnis();
+            gameTimer.Stop();
+            gameTimer2.Stop();
+            gameTimer3.Stop();
+            splayer.Stop();
 
-        
+            wnd.Show();
+            this.Close();
+        }
 
-        private void animateHinderniss(Rectangle hindernis1,Rectangle hindernis2)
+        private void animateHinderniss(Rectangle hindernis1,Rectangle hindernis2, Rectangle hindernis3)
         {
             switch (x)
             {
@@ -321,6 +345,7 @@ namespace WpfAppReturnOfSASHE
 
             hindernis1.Fill = hindernisIMG;
             hindernis2.Fill = hindernisIMG;
+            hindernis3.Fill = hindernisIMG;
 
             x++;
             if (x > 7)
