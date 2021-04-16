@@ -19,6 +19,12 @@ namespace WpfAppReturnOfSASHE
         }
 
         public string Name { get => name; set => name = value; }
-        public int Score { get => score; set => score = value; }
+        public int Score { get => score;  }
+
+        public void addPoint()
+        {
+            this.score++;
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Media;
@@ -24,7 +25,7 @@ namespace WpfAppReturnOfSASHE
     public partial class MainWindow : Window
     {
         int backgroundspeed = 5;
-        int backgroundspeedGalaxy = 9;
+        int backgroundspeedGalaxy = 8;
         int jumpspeed = 9;
         int hindernisspeed = 10;
         int i;
@@ -58,9 +59,11 @@ namespace WpfAppReturnOfSASHE
         DispatcherTimer gameTimer = new DispatcherTimer();
         DispatcherTimer gameTimer2 = new DispatcherTimer();
         DispatcherTimer gameTimer3 = new DispatcherTimer();
+        DispatcherTimer gameTimer4 = new DispatcherTimer();
 
 
         private SoundPlayer splayer;
+        private MediaPlayer mediaPlayer = new MediaPlayer();
 
         public MainWindow()
         {
@@ -81,8 +84,13 @@ namespace WpfAppReturnOfSASHE
 
             charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_02.gif"));
             hindernisIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Hindernis/Gaswolke7.png"));
+            splayer = new SoundPlayer("Musik\\JumpAndRun\\ReturnOfSASHEMusik.wav");
+            splayer.Play();
 
-            MusikAbspielen();
+            gameTimer4.Tick += MusikAbspielen;
+            gameTimer4.Interval = TimeSpan.FromSeconds(395);
+            gameTimer4.Start();
+            
          
         }
 
@@ -127,12 +135,13 @@ namespace WpfAppReturnOfSASHE
             hintergrundZwischenraumLinks2.Fill = zwischenraumLinks;
             hintergrundZwischenraumMitte2.Fill = zwischenraumMitte;
             hintergrundZwischenraumRechts2.Fill = zwischenraumRechts;
+
+             
         }
 
 
-        private void MusikAbspielen()
+        private void MusikAbspielen(object sender, EventArgs e)
         {
-            splayer = new SoundPlayer("Musik\\JumpAndRun\\ReturnOfSASHEMusik.wav");
             splayer.Play();
         }
 
@@ -293,11 +302,12 @@ namespace WpfAppReturnOfSASHE
             hindernis2Box = new Rect(Canvas.GetLeft(hindernis2), Canvas.GetTop(hindernis2), hindernis2.Width, hindernis2.Height);
             hindernis3Box = new Rect(Canvas.GetLeft(hindernis3), Canvas.GetTop(hindernis3), hindernis3.Width, hindernis3.Height);
 
+            /*
             if(charakterBox.IntersectsWith(hindernis1Box) || charakterBox.IntersectsWith(hindernis2Box) || charakterBox.IntersectsWith(hindernis3Box))
             {
                 stopGame();
             }
-
+            */
         }
 
         private void stopGame()

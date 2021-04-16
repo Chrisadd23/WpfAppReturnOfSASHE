@@ -103,7 +103,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Bilder\HintergrundBilder\Raum1.png" />
   </ItemGroup>
