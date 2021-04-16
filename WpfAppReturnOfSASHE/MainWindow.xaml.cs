@@ -340,12 +340,12 @@ namespace WpfAppReturnOfSASHE
             hindernis2Box = new Rect(Canvas.GetLeft(hindernis2), Canvas.GetTop(hindernis2), hindernis2.Width, hindernis2.Height);
             hindernis3Box = new Rect(Canvas.GetLeft(hindernis3), Canvas.GetTop(hindernis3), hindernis3.Width, hindernis3.Height);
 
-            /*
+            
             if(charakterBox.IntersectsWith(hindernis1Box) || charakterBox.IntersectsWith(hindernis2Box) || charakterBox.IntersectsWith(hindernis3Box))
             {
                 stopGame();
             }
-            */
+            
         }
 
         private void stopGame()
@@ -353,6 +353,8 @@ namespace WpfAppReturnOfSASHE
             gameTimer.Stop();
             gameTimer2.Stop();
             gameTimer3.Stop();
+            gameTimer4.Stop();
+            gameTimer5.Stop();
             splayer.Stop();
 
             var wnd = new SpielErgebnis();
