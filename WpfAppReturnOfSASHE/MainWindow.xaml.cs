@@ -24,12 +24,13 @@ namespace WpfAppReturnOfSASHE
     /// </summary>
     public partial class MainWindow : Window
     {
-        int backgroundspeed = 5;
+        int backgroundspeed = 7;
         int backgroundspeedGalaxy = 8;
         int jumpspeed = 9;
         int hindernisspeed = 10;
         int i;
         int x;
+        int anzahlBeschleunigen = 0;
 
         bool goUp;
 
@@ -60,6 +61,7 @@ namespace WpfAppReturnOfSASHE
         DispatcherTimer gameTimer2 = new DispatcherTimer();
         DispatcherTimer gameTimer3 = new DispatcherTimer();
         DispatcherTimer gameTimer4 = new DispatcherTimer();
+        DispatcherTimer gameTimer5 = new DispatcherTimer();
 
 
         private SoundPlayer splayer;
@@ -90,8 +92,26 @@ namespace WpfAppReturnOfSASHE
             gameTimer4.Tick += MusikAbspielen;
             gameTimer4.Interval = TimeSpan.FromSeconds(395);
             gameTimer4.Start();
-            
+
+            gameTimer5.Tick += levelSchwierigkeit;
+            gameTimer5.Interval = TimeSpan.FromSeconds(30);
+            gameTimer5.Start();
          
+        }
+
+        private void levelSchwierigkeit(object sender, EventArgs e)
+        {
+            if(anzahlBeschleunigen < 5)
+            {
+                backgroundspeed += 1;
+                backgroundspeedGalaxy += 2;
+                if(anzahlBeschleunigen % 2 == 0)
+                {
+                    hindernisspeed += 1;
+                }
+                anzahlBeschleunigen++;
+            }
+            
         }
 
         public void HintergrundEinrichten()
@@ -154,7 +174,7 @@ namespace WpfAppReturnOfSASHE
         {
             MoveHintergrund(hintergrund1, hintergrund2, hintergrundZwischenraumLinks1, hintergrundZwischenraumMitte1, hintergrundZwischenraumRechts1, hintergrundZwischenraumLinks2, hintergrundZwischenraumMitte2, hintergrundZwischenraumRechts2, hintergrundDach1, hintergrundDach2, hintergrundBoden1, hintergrundBoden2, hintergrundGalaxy1, hintergrundGalaxy2, backgroundspeed, backgroundspeedGalaxy);
             moveCharakter(Charakter,Hindernis1,Hindernis2,Hindernis3);
-            moveHindernis(Hindernis1,Hindernis2,Hindernis3);
+            moveHindernis(Hindernis1,Hindernis2,Hindernis3,anzahlBeschleunigen);
         }
 
         private void HindernisMovements(object sender, EventArgs e)
@@ -252,20 +272,38 @@ namespace WpfAppReturnOfSASHE
 
         }
 
-        private void moveHindernis(Rectangle hindernis1, Rectangle hindernis2,Rectangle hindernis3)
+        private void moveHindernis(Rectangle hindernis1, Rectangle hindernis2,Rectangle hindernis3, int anzahlBeschleunigen)
         {
             Canvas.SetLeft(hindernis1, Canvas.GetLeft(hindernis1) - hindernisspeed);
-            Canvas.SetLeft(hindernis2, Canvas.GetLeft(hindernis2) - hindernisspeed);
 
-            if (Canvas.GetLeft(hindernis1) < -60)
+            if(anzahlBeschleunigen >=2)
+            {
+                Canvas.SetLeft(hindernis2, Canvas.GetLeft(hindernis2) - hindernisspeed);
+            }
+            if(anzahlBeschleunigen >= 4)
+            {
+                Canvas.SetLeft(hindernis3, Canvas.GetLeft(hindernis3) - hindernisspeed);
+            }
+            
+
+            if (Canvas.GetLeft(hindernis1) < -60 && anzahlBeschleunigen < 2)
             {
                 Canvas.SetLeft(hindernis1, 900);
             }
-            if(Canvas.GetLeft(hindernis2) < -60)
+            else if(Canvas.GetLeft(hindernis1) < -60 && anzahlBeschleunigen < 4)
+            {
+                Canvas.SetLeft(hindernis1, Canvas.GetLeft(hindernis2) + platziereHinderniss.Next(250, 450));
+            }
+            else if(Canvas.GetLeft(hindernis1) < -60 && anzahlBeschleunigen >= 4)
+            {
+                Canvas.SetLeft(hindernis1, Canvas.GetLeft(hindernis3) + platziereHinderniss.Next(250, 450));
+            }
+
+            if(anzahlBeschleunigen >= 2 && Canvas.GetLeft(hindernis2) < -60)
             {
                     Canvas.SetLeft(hindernis2, Canvas.GetLeft(hindernis1) + platziereHinderniss.Next(250,450));
             }
-            if(Canvas.GetLeft(hindernis3) <-60)
+            if(anzahlBeschleunigen >= 4 && Canvas.GetLeft(hindernis3) < -60)
             {
                     Canvas.SetLeft(hindernis3, Canvas.GetLeft(hindernis2) + platziereHinderniss.Next(250, 450));
             }
@@ -312,11 +350,12 @@ namespace WpfAppReturnOfSASHE
 
         private void stopGame()
         {
-            var wnd = new SpielErgebnis();
             gameTimer.Stop();
             gameTimer2.Stop();
             gameTimer3.Stop();
             splayer.Stop();
+
+            var wnd = new SpielErgebnis();
 
             wnd.Show();
             this.Close();

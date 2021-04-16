@@ -11,7 +11,7 @@
         <Canvas.Background>
             <ImageBrush ImageSource="Bilder\HintergrundBilder\Hintergrund.png"></ImageBrush>
         </Canvas.Background>
-        
+
         <Rectangle x:Name="Darstellung1" RenderTransformOrigin="0.5,0.5"  Width="80"  Height="100"  Canvas.Bottom="30" Canvas.Right="30" Fill="Gray">
             <Rectangle.RenderTransform>
                 <ScaleTransform ScaleX="-1"></ScaleTransform>
@@ -43,6 +43,8 @@
         <TextBlock x:Name="platz5" Canvas.Top="275" Canvas.Left="340" Width="120" Height="20" FontWeight="UltraBold" TextAlignment="Center" FontSize="15" Foreground="White">Score 5</TextBlock>
         <TextBlock></TextBlock>
         
-        
+        <Button x:Name="btn_restart" Click="btn_restart_Click" Content="Restart" Width="75" Canvas.Left="200" Canvas.Top="369"/>
+
+
     </Canvas>
 </Window>

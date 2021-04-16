@@ -30,17 +30,24 @@ namespace WpfAppReturnOfSASHE
 
         ImageBrush runner = new ImageBrush();
         ImageBrush runner2 = new ImageBrush();
-        int i = 0;
+
         
+        int i = 0;
+
+        SoundPlayer splayer  = new SoundPlayer("Musik\\EndeScore\\NGNL.wav");
 
         public SpielErgebnis()
         {
             InitializeComponent();
+            splayer.Play();
             canvasSpielstand.Focus();
+            
             gameTimer.Tick += CharakterBewegen;
             gameTimer.Interval = TimeSpan.FromMilliseconds(80);
             gameTimer.Start();
-   
+            
+            
+           
         }
 
         private void CharakterBewegen(object sender, EventArgs e)
@@ -132,6 +139,19 @@ namespace WpfAppReturnOfSASHE
                     i = 0;
                 }
             
-        }  
+        }
+
+        private void btn_restart_Click(object sender, RoutedEventArgs e)
+        {
+            restartGame();
+        }
+
+        private void restartGame()
+        {
+            MainWindow spiel = new MainWindow();
+            spiel.Show();
+
+            this.Close();
+        }
     }
 }
