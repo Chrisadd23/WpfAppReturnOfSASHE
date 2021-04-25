@@ -25,6 +25,9 @@ namespace WpfAppReturnOfSASHE
     public partial class SpielErgebnis : Window
     {
         DispatcherTimer gameTimer = new DispatcherTimer();
+        DispatcherTimer gameTimer2 = new DispatcherTimer();
+
+
         
 
 
@@ -45,8 +48,13 @@ namespace WpfAppReturnOfSASHE
             gameTimer.Tick += CharakterBewegen;
             gameTimer.Interval = TimeSpan.FromMilliseconds(80);
             gameTimer.Start();
-            
-            
+
+
+            //----- Musik wird je nach Rang festgelegt im weiteren verlauf
+
+            gameTimer2.Tick += hintergrundMusik;
+            gameTimer2.Interval += TimeSpan.FromSeconds(168);
+            gameTimer2.Start();
            
         }
 
@@ -54,6 +62,11 @@ namespace WpfAppReturnOfSASHE
         {
             CharakterBewegenErgebnisLinks();
             CharakterBewegenErgebnisRechts();
+        }
+
+        private void hintergrundMusik(object sender, EventArgs e)
+        {
+            splayer.Play();
         }
 
         

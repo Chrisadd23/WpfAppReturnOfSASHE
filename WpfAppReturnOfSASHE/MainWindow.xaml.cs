@@ -352,13 +352,24 @@ namespace WpfAppReturnOfSASHE
                 stopGame();
                 MessageBox.Show(score+"");
             }
-         
-            if(charakterBox.X == (hindernis1Box.X + charakterBox.Width) || charakterBox.X == (hindernis2Box.X + charakterBox.Width) || charakterBox.X == (hindernis3Box.X + charakterBox.Width))
+
+
+            if (charakterBox.X > (hindernis1Box.X -(hindernis1Box.Width / 9)) && charakterBox.X < (hindernis1Box.X + (hindernis1Box.Width /9)) ||
+                charakterBox.X > (hindernis2Box.X - (hindernis2Box.Width / 9)) && charakterBox.X < (hindernis2Box.X + (hindernis2Box.Width / 9)) ||
+                charakterBox.X > (hindernis3Box.X - (hindernis3Box.Width / 9)) && charakterBox.X < (hindernis3Box.X + (hindernis3Box.Width / 9)))
             {
                 Console.WriteLine(charakterBox.X + " " + hindernis1Box.X);
                 score += points;
                 lblScore.Content = score.ToString();
             }
+            /*
+            if (charakterBox.X == (hindernis1Box.X + charakterBox.Width) || charakterBox.X == (hindernis2Box.X + charakterBox.Width) || charakterBox.X == (hindernis3Box.X + charakterBox.Width))
+            {
+                Console.WriteLine(charakterBox.X + " " + hindernis1Box.X);
+                score += points;
+                lblScore.Content = score.ToString();
+            }
+            */
             
         }
 
