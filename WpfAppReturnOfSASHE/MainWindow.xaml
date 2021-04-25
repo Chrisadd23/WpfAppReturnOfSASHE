@@ -62,7 +62,7 @@
 
         </Rectangle>
 
-        <Button x:Name="SpielEnde" Click="OnMyButtonClickResult" Width="20" Height="20" Canvas.Left="10" Panel.ZIndex="100" Canvas.Top="10" RenderTransformOrigin="0.65,0.9" >
+        <Button x:Name="SpielEnde"  Click="btnClickStop" Width="20" Height="20" Canvas.Left="10" Panel.ZIndex="100" Canvas.Top="10" RenderTransformOrigin="0.65,0.9" >
             X
         </Button>
         <Rectangle x:Name="Charakter" Width="80"  Height="100"  Canvas.Left="30" Fill="Gray" Canvas.Top="303" Panel.ZIndex="100"/>
@@ -72,6 +72,12 @@
         <Rectangle x:Name="Hindernis1" Width="54"  Height="54"  Canvas.Left="1154" Fill="Red" Canvas.Top="349" Panel.ZIndex="100"/>
         <Rectangle x:Name="Hindernis2" Width="54"  Height="54"  Canvas.Left="1689" Fill="Red" Canvas.Top="349" Panel.ZIndex="100"/>
         <Rectangle x:Name="Hindernis3" Width="54"  Height="54"  Canvas.Left="2097" Fill="Red" Canvas.Top="349" Panel.ZIndex="100"/>
+        <Label Content="Score:" Canvas.Left="555" Canvas.Top="494" RenderTransformOrigin="-0.731,0.519" FontSize="16" FontWeight="Bold" Panel.ZIndex="100" Foreground="White"/>
+        <Label x:Name="lblScore"  Canvas.Left="632" Canvas.Top="494" RenderTransformOrigin="-0.566,-0.115" Width="126" Panel.ZIndex="100" FontSize="16" FontWeight="Bold" Foreground="White"/>
+        <Button x:Name="btnEinstellung"  Click="BtnClickMenue" Width="20" Height="20" Canvas.Left="49" Panel.ZIndex="100" Canvas.Top="10" RenderTransformOrigin="0.65,0.9">
+            <Image Source="Bilder/HintergrundBilder/Einstellungen.png">
+            </Image>
+        </Button>
 
 
     </Canvas>

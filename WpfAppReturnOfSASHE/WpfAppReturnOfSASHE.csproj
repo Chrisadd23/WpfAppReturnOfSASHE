@@ -161,5 +161,9 @@
     <Resource Include="Bilder\Hindernis\Gaswolke6.png" />
     <Resource Include="Bilder\Hindernis\Gaswolke7.png" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Bilder\HintergrundBilder\Einstellungen.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

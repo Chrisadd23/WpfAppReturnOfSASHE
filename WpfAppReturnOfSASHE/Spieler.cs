@@ -8,23 +8,24 @@ namespace WpfAppReturnOfSASHE
 {
     public class Spieler
     {
-        private string name;
-        private int score;
+        private string userName;
+        private string vorname;
+        private string nachname;
+        private int score = 0;
         private DateTime spielStart;
 
+        public string UserName { get => userName; set => userName = value; }
+        public string Vorname { get => vorname; set => vorname = value; }
+        public string Nachname { get => nachname; set => nachname = value; }
+        public int Score { get => score; set => score = value; }
 
         public Spieler()
         {
             spielStart = DateTime.Now;
         }
 
-        public string Name { get => name; set => name = value; }
-        public int Score { get => score;  }
+        
 
-        public void addPoint()
-        {
-            this.score++;
-        }
-
+        
     }
 }

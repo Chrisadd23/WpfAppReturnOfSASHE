@@ -24,15 +24,17 @@ namespace WpfAppReturnOfSASHE
     /// </summary>
     public partial class MainWindow : Window
     {
-        int backgroundspeed = 7;
-        int backgroundspeedGalaxy = 8;
-        int jumpspeed = 9;
-        int hindernisspeed = 10;
-        int i;
-        int x;
-        int anzahlBeschleunigen = 0;
+        private int backgroundspeed = 5;
+        private int backgroundspeedGalaxy = 6;
+        private int jumpspeed = 9;
+        private int hindernisspeed = 10;
+        private int i;
+        private int x;
+        private int anzahlBeschleunigen = 0;
+        private int points = 50;
+        private int score = 0;
 
-        bool goUp;
+        private bool goUp;
 
         Random platziereHinderniss = new Random();
 
@@ -67,11 +69,15 @@ namespace WpfAppReturnOfSASHE
         private SoundPlayer splayer;
         private MediaPlayer mediaPlayer = new MediaPlayer();
 
+        Spieler spieler;
+
         public MainWindow()
         {
             InitializeComponent();
             HintergrundEinrichten();
             myCanvas.Focus();
+
+
             gameTimer.Tick += startEvents;
             gameTimer.Interval = TimeSpan.FromMilliseconds(20);
             gameTimer.Start();
@@ -96,6 +102,8 @@ namespace WpfAppReturnOfSASHE
             gameTimer5.Tick += levelSchwierigkeit;
             gameTimer5.Interval = TimeSpan.FromSeconds(30);
             gameTimer5.Start();
+
+            
          
         }
 
@@ -108,6 +116,7 @@ namespace WpfAppReturnOfSASHE
                 if(anzahlBeschleunigen % 2 == 0)
                 {
                     hindernisspeed += 1;
+                    this.points += points;
                 }
                 anzahlBeschleunigen++;
             }
@@ -163,11 +172,6 @@ namespace WpfAppReturnOfSASHE
         private void MusikAbspielen(object sender, EventArgs e)
         {
             splayer.Play();
-        }
-
-        private void OnMyButtonClickResult(object sender, RoutedEventArgs e)
-        {
-            stopGame();
         }
 
         private void startEvents(object sender, EventArgs e)
@@ -343,7 +347,17 @@ namespace WpfAppReturnOfSASHE
             
             if(charakterBox.IntersectsWith(hindernis1Box) || charakterBox.IntersectsWith(hindernis2Box) || charakterBox.IntersectsWith(hindernis3Box))
             {
+
+
                 stopGame();
+                MessageBox.Show(score+"");
+            }
+         
+            if(charakterBox.X == (hindernis1Box.X + charakterBox.Width) || charakterBox.X == (hindernis2Box.X + charakterBox.Width) || charakterBox.X == (hindernis3Box.X + charakterBox.Width))
+            {
+                Console.WriteLine(charakterBox.X + " " + hindernis1Box.X);
+                score += points;
+                lblScore.Content = score.ToString();
             }
             
         }
@@ -462,6 +476,16 @@ namespace WpfAppReturnOfSASHE
                 charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_02.gif"));
 
             }
+        }
+
+        private void btnClickStop(object sender, RoutedEventArgs e)
+        {
+            stopGame();
+        }
+
+        private void BtnClickMenue(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 
