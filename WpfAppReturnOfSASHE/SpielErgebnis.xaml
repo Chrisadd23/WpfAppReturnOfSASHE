@@ -36,13 +36,13 @@
             </TextBlock.Effect>
         </TextBlock>
 
-        <TextBlock x:Name="platz1" Canvas.Top="120" Canvas.Left="340" Width="120" Height="40" FontWeight="UltraBold" TextAlignment="Center" FontSize="30" Foreground="#FFA0CF00">Score 1</TextBlock>
-        <TextBlock x:Name="platz2" Canvas.Top="170" Canvas.Left="340" Width="120" Height="30" FontWeight="UltraBold" TextAlignment="Center" FontSize="25" Foreground="Silver">Score 2</TextBlock>
-        <TextBlock x:Name="platz3" Canvas.Top="215" Canvas.Left="340" Width="120" Height="25" FontWeight="UltraBold" TextAlignment="Center" FontSize="20" Foreground="#FF703434">Score 3</TextBlock>
-        <TextBlock x:Name="platz4" Canvas.Top="250" Canvas.Left="340" Width="120" Height="20" FontWeight="UltraBold" TextAlignment="Center" FontSize="15" Foreground="White">Score 4</TextBlock>
-        <TextBlock x:Name="platz5" Canvas.Top="275" Canvas.Left="340" Width="120" Height="20" FontWeight="UltraBold" TextAlignment="Center" FontSize="15" Foreground="White">Score 5</TextBlock>
+        <TextBlock x:Name="platz1" Canvas.Top="120" Canvas.Left="200" Width="400" Height="40" FontWeight="UltraBold" TextAlignment="Center" FontSize="30" Foreground="#FFA0CF00">Score 1</TextBlock>
+        <TextBlock x:Name="platz2" Canvas.Top="170" Canvas.Left="200" Width="400" Height="30" FontWeight="UltraBold" TextAlignment="Center" FontSize="25" Foreground="Silver">Score 2</TextBlock>
+        <TextBlock x:Name="platz3" Canvas.Top="215" Canvas.Left="200" Width="400" Height="25" FontWeight="UltraBold" TextAlignment="Center" FontSize="20" Foreground="#FF703434">Score 3</TextBlock>
+        <TextBlock x:Name="platz4" Canvas.Top="250" Canvas.Left="200" Width="400" Height="20" FontWeight="UltraBold" TextAlignment="Center" FontSize="15" Foreground="White">Score 4</TextBlock>
+        <TextBlock x:Name="platz5" Canvas.Top="275" Canvas.Left="200" Width="400" Height="20" FontWeight="UltraBold" TextAlignment="Center" FontSize="15" Foreground="White">Score 5</TextBlock>
         <TextBlock></TextBlock>
-        
+
         <Button x:Name="btn_restart" Click="btn_restart_Click" Content="Restart" Width="75" Canvas.Left="200" Canvas.Top="369"/>
 
 

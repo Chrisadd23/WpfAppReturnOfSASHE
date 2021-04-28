@@ -26,12 +26,10 @@ namespace WpfAppReturnOfSASHE
     
     public partial class SpielErgebnis : Window
     {
+        GameWindow gameWindow;
+
         DispatcherTimer gameTimer = new DispatcherTimer();
         DispatcherTimer gameTimer2 = new DispatcherTimer();
-
-
-        
-
 
         ImageBrush runner = new ImageBrush();
         ImageBrush runner2 = new ImageBrush();
@@ -40,11 +38,13 @@ namespace WpfAppReturnOfSASHE
         int i = 0;
 
         SoundPlayer splayer  = new SoundPlayer("Musik\\EndeScore\\NGNL.wav");
+        Spieler spieler;
 
-        public SpielErgebnis(Spieler spieler)
+        public SpielErgebnis()
         {
             InitializeComponent();
             splayer.Play();
+            
             canvasSpielstand.Focus();
             
             gameTimer.Tick += CharakterBewegen;
@@ -59,6 +59,13 @@ namespace WpfAppReturnOfSASHE
             gameTimer2.Start();
            
         }
+        public SpielErgebnis(Spieler spieler) : this()
+        {
+            this.spieler = spieler;
+            platz1.Text = spieler.ToString();
+        }
+
+
 
         private void addScore(Spieler spieler)
         {
@@ -130,9 +137,17 @@ namespace WpfAppReturnOfSASHE
 
         private void restartGame()
         {
-            GameWindow gameWindow = new GameWindow();
-            gameWindow.Show();
-
+            if(spieler == null)
+            {
+                gameWindow = new GameWindow();
+                gameWindow.Show();
+            }
+            else
+            {
+                gameWindow = new GameWindow(spieler);
+                gameWindow.Show();
+            }
+            
             this.Close();
         }
     }

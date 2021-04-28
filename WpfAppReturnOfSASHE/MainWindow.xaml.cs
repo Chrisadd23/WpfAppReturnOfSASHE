@@ -54,7 +54,7 @@ namespace WpfAppReturnOfSASHE
             datenbank.Stop();
             gameWindow = new GameWindow(spieler);
             gameWindow.Show();
-            
+            this.Close();
         }
     }
 

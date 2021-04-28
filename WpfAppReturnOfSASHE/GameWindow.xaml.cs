@@ -70,7 +70,7 @@ namespace WpfAppReturnOfSASHE
         private MediaPlayer mediaPlayer = new MediaPlayer();
 
         Spieler spieler;
-
+        SpielErgebnis spielResult;
         
         public GameWindow()
         {
@@ -326,11 +326,12 @@ namespace WpfAppReturnOfSASHE
 
         private void moveCharakter(Rectangle charakter, Rectangle hindernis1, Rectangle hindernis2, Rectangle hindernis3)
         {
-            if (Canvas.GetTop(charakter) < 303 && goUp == false)
-            {
+           if (Canvas.GetTop(charakter) < 303 && goUp == false)
+           {
                 Canvas.SetTop(charakter, Canvas.GetTop(charakter) + jumpspeed);
-            }
-
+                charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_02.gif"));
+           }
+           
 
             if (goUp == true && Canvas.GetTop(charakter) >= 150)
             {
@@ -341,12 +342,13 @@ namespace WpfAppReturnOfSASHE
             {
                 goUp = false;
             }
-
+            
             if (goUp == false && Canvas.GetTop(charakter) < 303)
             {
                 Canvas.SetTop(charakter, Canvas.GetTop(charakter) + jumpspeed);
                 charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_02.gif"));
             }
+            
 
             charakterBox = new Rect(Canvas.GetLeft(charakter), Canvas.GetTop(charakter), charakter.Width - 50, charakter.Height - 50);
             hindernis1Box = new Rect(Canvas.GetLeft(hindernis1), Canvas.GetTop(hindernis1), hindernis1.Width, hindernis1.Height);
@@ -371,14 +373,6 @@ namespace WpfAppReturnOfSASHE
                 score += points;
                 lblScore.Content = score.ToString();
             }
-            /*
-            if (charakterBox.X == (hindernis1Box.X + charakterBox.Width) || charakterBox.X == (hindernis2Box.X + charakterBox.Width) || charakterBox.X == (hindernis3Box.X + charakterBox.Width))
-            {
-                Console.WriteLine(charakterBox.X + " " + hindernis1Box.X);
-                score += points;
-                lblScore.Content = score.ToString();
-            }
-            */
 
         }
 
@@ -391,8 +385,18 @@ namespace WpfAppReturnOfSASHE
             gameTimer5.Stop();
             splayer.Stop();
 
-            var wnd = new SpielErgebnis(spieler);
-            wnd.Show();
+            if(spieler == null)
+            {
+                spielResult = new SpielErgebnis();
+            }
+            else
+            {
+                spieler.Score = score;
+                spielResult = new SpielErgebnis(spieler);
+            }
+                
+            
+            spielResult.Show();
 
             this.Close();
         }
