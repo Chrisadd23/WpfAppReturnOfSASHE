@@ -1,4 +1,6 @@
-﻿using System;
+﻿using WpfAppReturnOfSASHE;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Media;
@@ -39,14 +41,14 @@ namespace WpfAppReturnOfSASHE
 
         SoundPlayer splayer  = new SoundPlayer("Musik\\EndeScore\\NGNL.wav");
 
-        public SpielErgebnis()
+        public SpielErgebnis(Spieler spieler)
         {
             InitializeComponent();
             splayer.Play();
             canvasSpielstand.Focus();
             
             gameTimer.Tick += CharakterBewegen;
-            gameTimer.Interval = TimeSpan.FromMilliseconds(80);
+            gameTimer.Interval = TimeSpan.FromMilliseconds(50);
             gameTimer.Start();
 
 
@@ -58,10 +60,14 @@ namespace WpfAppReturnOfSASHE
            
         }
 
+        private void addScore(Spieler spieler)
+        {
+            
+        }
+
         private void CharakterBewegen(object sender, EventArgs e)
         {
-            CharakterBewegenErgebnisLinks();
-            CharakterBewegenErgebnisRechts();
+            CharakterBewegenErgebnis();
         }
 
         private void hintergrundMusik(object sender, EventArgs e)
@@ -71,7 +77,7 @@ namespace WpfAppReturnOfSASHE
 
         
 
-        private void CharakterBewegenErgebnisRechts()
+        private void CharakterBewegenErgebnis()
         {
             
 
@@ -106,6 +112,7 @@ namespace WpfAppReturnOfSASHE
 
             
             Darstellung1.Fill = runner2;
+            Darstellung2.Fill = runner2;
             i++;
             if (i > 7)
             {
@@ -113,56 +120,18 @@ namespace WpfAppReturnOfSASHE
             }
         }
 
-        private void CharakterBewegenErgebnisLinks()
-        {
-            
-            
-                switch(i)
-                {
-                    case 0:
-                        runner.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_01.gif"));
-                        break;
-                    case 1:
-                        runner.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_02.gif"));
-                        break;
-                    case 2:
-                        runner.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_03.gif"));
-                        break;
-                    case 3:
-                        runner.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_04.gif"));
-                        break;
-                    case 4:
-                        runner.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_05.gif"));
-                        break;
-                    case 5:
-                        runner.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_06.gif"));
-                        break;
-                    case 6:
-                        runner.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_07.gif"));
-                        break;
-                    case 7:
-                        runner.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_08.gif"));
-                        break;
-                }
-
-                Darstellung2.Fill = runner;
-                i++;
-                if(i > 7)
-                {
-                    i = 0;
-                }
-            
-        }
-
         private void btn_restart_Click(object sender, RoutedEventArgs e)
         {
+            gameTimer.Stop();
+            gameTimer2.Stop();
+            splayer.Stop();
             restartGame();
         }
 
         private void restartGame()
         {
-            MainWindow spiel = new MainWindow();
-            spiel.Show();
+            GameWindow gameWindow = new GameWindow();
+            gameWindow.Show();
 
             this.Close();
         }
