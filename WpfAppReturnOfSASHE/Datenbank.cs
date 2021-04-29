@@ -64,9 +64,9 @@ namespace WpfAppReturnOfSASHE
                     con.Close();
 
                 }
-                catch(MySqlException ex)
+                catch(MySqlException e)
                 {
-                    MessageBox.Show(ex + "");
+                    MessageBox.Show(e + "");
                 }
 
                 MessageBox.Show(ex +"");
