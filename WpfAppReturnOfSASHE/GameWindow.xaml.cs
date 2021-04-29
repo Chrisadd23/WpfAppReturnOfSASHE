@@ -391,7 +391,8 @@ namespace WpfAppReturnOfSASHE
             }
             else
             {
-                spieler.Score = score;
+                if(score > spieler.Score)
+                    spieler.Score = score;
                 spielResult = new SpielErgebnis(spieler);
             }
                 

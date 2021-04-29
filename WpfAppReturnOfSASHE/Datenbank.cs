@@ -95,6 +95,31 @@ namespace WpfAppReturnOfSASHE
             return null;
         }
 
+        public Spieler Registrieren(string vorname, string nachname, string benutzername, string benutzerpasswort, string benutzerpasswortErneut)
+        {
+            account = "SElECT * FROM spieler;";
+            command = new MySqlCommand(account, connection);
+            reader = command.ExecuteReader();
+            while(reader.Read())
+            {
+                if(reader.GetString(3).Equals(benutzername))
+                {
+                    MessageBox.Show(benutzername + " ist schon vergeben");
+                    break;
+                }
+                if(benutzerpasswort.Length < 5)
+                {
+                    MessageBox.Show("Ihr Passwort muss mindestens 5 Zeichen haben!");
+                }
+                if(!(benutzerpasswort.Equals(benutzerpasswortErneut)))
+                {
+                    MessageBox.Show("Die Passwörter müssen überein stimmen.");
+                }
+            }
+
+            return null;
+        }
+
         private object check(object o)
         {
             if(o != DBNull.Value)

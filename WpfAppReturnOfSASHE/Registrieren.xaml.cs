@@ -33,7 +33,14 @@ namespace WpfAppReturnOfSASHE
 
         private void btn_Registrieren(object sender, RoutedEventArgs e)
         {
+            if(reg_Vorname.Text == "" || reg_Nachname.Text == "" || reg_Benutzername.Text == "" || reg_Passwort.Text == "" || reg_PasswortErneut.Text == "")
+            {
+                MessageBox.Show("Bitte keine Box leer lassen");
+            }
+            else
+            {
 
+            }
         }
     }
 }
