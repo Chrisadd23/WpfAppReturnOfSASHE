@@ -17,26 +17,19 @@ namespace WpfAppReturnOfSASHE
         MySqlConnection connection = null;
         MySqlCommand command = null;
         MySqlDataReader reader = null;
+        MySqlDataAdapter adapter = null;
+        
 
         Spieler spieler;
         int versuche = 0;
 
-        private string firstname;
-        private string lastname;
-        private string username;
-        private string userpassword;
-        private int score;
+  
         private string account;
 
         public Datenbank()
         {
-            Start();
-        }
-
-        public void Start()
-        {
             OpenConnect();
-            Command();
+            
         }
 
        
@@ -45,7 +38,6 @@ namespace WpfAppReturnOfSASHE
             try
             {
                 connection = new MySqlConnection(myConnectionString);
-                connection.Open();
             }
             catch(MySqlException ex)
             {
@@ -62,6 +54,8 @@ namespace WpfAppReturnOfSASHE
 
         public Spieler checkAnmeldung(string gui_Username, string gui_Userpasswort)
         {
+            connection.Open();
+            Command();
             account = "SElECT * FROM spieler;";
             command = new MySqlCommand(account, connection);
             reader = command.ExecuteReader();
@@ -86,6 +80,7 @@ namespace WpfAppReturnOfSASHE
                     {
                         MessageBox.Show("Sie haben das Passwort falsch eingegeben!");
                         versuche++;
+                        reader.Close();
                     }
                     
                 }
@@ -97,25 +92,31 @@ namespace WpfAppReturnOfSASHE
 
         public Spieler Registrieren(string vorname, string nachname, string benutzername, string benutzerpasswort, string benutzerpasswortErneut)
         {
-            account = "SElECT * FROM spieler;";
-            command = new MySqlCommand(account, connection);
-            reader = command.ExecuteReader();
-            while(reader.Read())
-            {
-                if(reader.GetString(3).Equals(benutzername))
-                {
-                    MessageBox.Show(benutzername + " ist schon vergeben");
+             connection.Open();
+             account = "SElECT * FROM spieler;";
+             command = new MySqlCommand(account, connection);
+             reader = command.ExecuteReader();
+             while (reader.Read())
+             {
+
+                 if (reader.GetString(3).Equals(benutzername))
+                 {
+                     MessageBox.Show(benutzername + " ist schon vergeben");
+                     return null;
+                 }
+                 else
+                 {
+                    MessageBox.Show(reader.GetString(3) + " " + benutzername);
+                    Stop();
+                    
+                    command.CommandText = "INSERT INTO spieler (firstname,lastname,username,userpassword,Score,locked) VALUES ('" + vorname + "','" + nachname + "','" + benutzername + "','" + benutzerpasswort + "',0,0);";
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    reader.Close();
+
                     break;
                 }
-                if(benutzerpasswort.Length < 5)
-                {
-                    MessageBox.Show("Ihr Passwort muss mindestens 5 Zeichen haben!");
-                }
-                if(!(benutzerpasswort.Equals(benutzerpasswortErneut)))
-                {
-                    MessageBox.Show("Die Passwörter müssen überein stimmen.");
-                }
-            }
+             }
 
             return null;
         }

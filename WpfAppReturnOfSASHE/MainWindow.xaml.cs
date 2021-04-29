@@ -30,9 +30,10 @@ namespace WpfAppReturnOfSASHE
         GameWindow gameWindow;
         Registrieren registrieren;
         Spieler spieler;
+        
         public MainWindow()
         {
-
+            InitializeComponent();
         }
 
         private void btn_startGameOffline(object sender, RoutedEventArgs e)
@@ -46,6 +47,8 @@ namespace WpfAppReturnOfSASHE
         private void btn_clickRegistrieren(object sender, RoutedEventArgs e)
         {
             registrieren = new Registrieren();
+            registrieren.Show();
+            this.Close();
         }
 
         private void btn_clickAnmelden(object sender, RoutedEventArgs e)
