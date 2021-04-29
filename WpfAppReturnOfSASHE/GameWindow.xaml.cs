@@ -358,10 +358,7 @@ namespace WpfAppReturnOfSASHE
 
             if (charakterBox.IntersectsWith(hindernis1Box) || charakterBox.IntersectsWith(hindernis2Box) || charakterBox.IntersectsWith(hindernis3Box))
             {
-
-
                 stopGame();
-                MessageBox.Show(score + "");
             }
 
 

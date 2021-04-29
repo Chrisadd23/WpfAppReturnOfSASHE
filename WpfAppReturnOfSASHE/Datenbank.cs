@@ -14,6 +14,7 @@ namespace WpfAppReturnOfSASHE
     public class Datenbank
     {
         string myConnectionString = "Server=localhost;Uid=root;Pwd=;database=csprojektros;"; //auf xampp basierend
+        
         MySqlConnection connection;
         MySqlCommand command;
         MySqlDataReader reader;
@@ -21,7 +22,7 @@ namespace WpfAppReturnOfSASHE
         
 
         Spieler spieler;
-        int versuche = 0;
+        
 
   
         private string account;
@@ -41,6 +42,33 @@ namespace WpfAppReturnOfSASHE
             }
             catch(MySqlException ex)
             {
+                string QueryCreateDB = "create database csprojektros;";
+                MySqlConnection conDataBase = new MySqlConnection(myConnectionString);
+                MySqlCommand cmdDataBase = new MySqlCommand(QueryCreateDB, conDataBase);
+                
+                try
+                {
+                    conDataBase.Open();
+                    cmdDataBase.ExecuteNonQuery();
+                    conDataBase.Close();
+
+
+                    string createTable = "CREATE TABLE spieler(id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,"+
+                        "firstname VARCHAR(30) NOT NULL, lastname VARCHAR(30) NOT NULL,"+
+                        "username VARCHAR(30) NOT NULL, userpassword VARCHAR(15) NOT NULL,"+
+                        "Score INT(15) NOT NULL, locked INT(1) NOT NULL)";
+                    MySqlConnection con = new MySqlConnection(myConnectionString);
+                    MySqlCommand cmdTable = new MySqlCommand(createTable, con);
+                    con.Open();
+                    cmdDataBase.ExecuteNonQuery();
+                    con.Close();
+
+                }
+                catch(MySqlException ex)
+                {
+                    MessageBox.Show(ex + "");
+                }
+
                 MessageBox.Show(ex +"");
             }
         }
@@ -76,7 +104,6 @@ namespace WpfAppReturnOfSASHE
                     if (!(reader.GetString(4).Equals(gui_Userpasswort)))
                     {
                         MessageBox.Show("Sie haben das Passwort falsch eingegeben!");
-                        versuche++;
                         reader.Close();
                     }
                     
