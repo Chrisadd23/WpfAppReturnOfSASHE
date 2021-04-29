@@ -53,7 +53,7 @@ namespace WpfAppReturnOfSASHE
 
         private void btn_clickAnmelden(object sender, RoutedEventArgs e)
         {
-            spieler = datenbank.checkAnmeldung(txt_userName.Text, txt_userPsw.Text);
+            spieler = datenbank.checkAnmeldung(txt_userName.Text, txt_userPsw.Password);
             datenbank.Stop();
             gameWindow = new GameWindow(spieler);
             gameWindow.Show();

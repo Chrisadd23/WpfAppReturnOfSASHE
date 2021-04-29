@@ -121,6 +121,50 @@ namespace WpfAppReturnOfSASHE
             return null;
         }
 
+        public List<Spieler> RanglisteSpieler()
+        {
+            List<Spieler> listSpieler = new List<Spieler>();
+
+            connection.Open();
+            command.CommandText = "SELECT * FROM spieler ORDER BY Score DESC;";
+            reader = command.ExecuteReader();
+
+
+            while(reader.Read())
+            {
+                if(listSpieler.Count < 5)
+                {
+                    int i = 1;
+                    Spieler spieler = new Spieler();
+                    spieler.Vorname = reader.GetString(i++);
+                    spieler.Nachname = reader.GetString(i++);
+                    spieler.UserName = reader.GetString(i++);
+                    i++;
+                    spieler.Score = Convert.ToInt32(reader.GetValue(i++));
+                    Console.WriteLine(spieler.ToString());
+
+                    listSpieler.Add(spieler);
+                }
+                else
+                {
+                    reader.Close();
+                    break;
+                }
+            }
+
+            return listSpieler;
+            
+        }
+
+
+        public void UpdateScore(Spieler spieler)
+        {
+            Stop();
+            command.CommandText = "UPDATE spieler SET Score = "+spieler.Score+" WHERE username = '"+ spieler.UserName+"' ;";
+            connection.Open();
+            command.ExecuteNonQuery();
+        }
+
         private object check(object o)
         {
             if(o != DBNull.Value)

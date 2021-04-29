@@ -52,7 +52,7 @@ namespace WpfAppReturnOfSASHE
             gameTimer.Start();
 
 
-            //----- Musik wird je nach Rang festgelegt im weiteren verlauf
+        
 
             gameTimer2.Tick += hintergrundMusik;
             gameTimer2.Interval += TimeSpan.FromSeconds(168);

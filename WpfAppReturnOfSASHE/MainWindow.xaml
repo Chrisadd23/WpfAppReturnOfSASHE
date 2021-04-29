@@ -10,7 +10,7 @@
 
     <Grid Background="Aquamarine" Margin="0,0,2,0">
         <TextBox x:Name="txt_userName" HorizontalAlignment="Left" Height="22" Margin="193,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="157"/>
-        <TextBox x:Name="txt_userPsw" HorizontalAlignment="Left" Height="23" Margin="193,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="157"/>
+        <PasswordBox PasswordChar="*" x:Name="txt_userPsw" HorizontalAlignment="Left" Height="23" Margin="193,114,0,0" VerticalAlignment="Top" Width="157"/>
         <Label Content="Benutzername" HorizontalAlignment="Left" Margin="81,62,0,0" VerticalAlignment="Top"/>
         <Label Content="Passwort" HorizontalAlignment="Left" Margin="81,110,0,0" VerticalAlignment="Top" Width="86"/>
         <Button Content="Anmelden" Click="btn_clickAnmelden" HorizontalAlignment="Left" Margin="115,177,0,0" VerticalAlignment="Top" Width="183"/>
