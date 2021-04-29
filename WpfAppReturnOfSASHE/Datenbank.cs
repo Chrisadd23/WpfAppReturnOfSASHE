@@ -14,10 +14,10 @@ namespace WpfAppReturnOfSASHE
     public class Datenbank
     {
         string myConnectionString = "Server=localhost;Uid=root;Pwd=;database=csprojektros;"; //auf xampp basierend
-        MySqlConnection connection = null;
-        MySqlCommand command = null;
-        MySqlDataReader reader = null;
-        MySqlDataAdapter adapter = null;
+        MySqlConnection connection;
+        MySqlCommand command;
+        MySqlDataReader reader;
+       
         
 
         Spieler spieler;
@@ -48,14 +48,11 @@ namespace WpfAppReturnOfSASHE
         private void Command()
         {
             command = connection.CreateCommand();
-            command.CommandText = "spieler";
-            command.CommandType =  System.Data.CommandType.TableDirect;
         }
 
         public Spieler checkAnmeldung(string gui_Username, string gui_Userpasswort)
         {
             connection.Open();
-            Command();
             account = "SElECT * FROM spieler;";
             command = new MySqlCommand(account, connection);
             reader = command.ExecuteReader();
@@ -84,13 +81,14 @@ namespace WpfAppReturnOfSASHE
                     }
                     
                 }
+                
 
             }//Ende While reader
-
+            MessageBox.Show("Bitte Registirieren Sie sich oder spielen Sie offline");
             return null;
         }
 
-        public Spieler Registrieren(string vorname, string nachname, string benutzername, string benutzerpasswort, string benutzerpasswortErneut)
+        public void Registrieren(string vorname, string nachname, string benutzername, string benutzerpasswort, string benutzerpasswortErneut)
         {
              connection.Open();
              account = "SElECT * FROM spieler;";
@@ -102,55 +100,78 @@ namespace WpfAppReturnOfSASHE
                  if (reader.GetString(3).Equals(benutzername))
                  {
                      MessageBox.Show(benutzername + " ist schon vergeben");
-                     return null;
+                    break;
                  }
                  else
                  {
                     MessageBox.Show(reader.GetString(3) + " " + benutzername);
                     Stop();
                     
-                    command.CommandText = "INSERT INTO spieler (firstname,lastname,username,userpassword,Score,locked) VALUES ('" + vorname + "','" + nachname + "','" + benutzername + "','" + benutzerpasswort + "',0,0);";
+                    account = "INSERT INTO spieler (firstname,lastname,username,userpassword,Score,locked) VALUES ('" + vorname + "','" + nachname + "','" + benutzername + "','" + benutzerpasswort + "',0,0);";
                     connection.Open();
+                    command = new MySqlCommand(account, connection);
                     command.ExecuteNonQuery();
-                    reader.Close();
+                    
 
                     break;
                 }
              }
 
-            return null;
+            reader.Close();
         }
 
         public List<Spieler> RanglisteSpieler()
         {
             List<Spieler> listSpieler = new List<Spieler>();
 
-            connection.Open();
-            command.CommandText = "SELECT * FROM spieler ORDER BY Score DESC;";
-            reader = command.ExecuteReader();
-
-
-            while(reader.Read())
+            try
             {
+          
+                connection.Open();
+                string cmd = "SELECT * FROM spieler ORDER BY Score DESC;";
+                command = new MySqlCommand(cmd, connection);
+                reader = command.ExecuteReader();
+
+
+
+                while (reader.Read())
+                {
+                    if (listSpieler.Count < 5)
+                    {
+                        int i = 1;
+                        Spieler spieler = new Spieler();
+                        spieler.Vorname = reader.GetString(i++);
+                        spieler.Nachname = reader.GetString(i++);
+                        spieler.UserName = reader.GetString(i++);
+                        i++;
+                        spieler.Score = Convert.ToInt32(reader.GetValue(i++));
+                        Console.WriteLine(spieler.ToString());
+
+                        listSpieler.Add(spieler);
+                    }
+                    else
+                    {
+
+                        break;
+                    }
+                }
                 if(listSpieler.Count < 5)
                 {
-                    int i = 1;
-                    Spieler spieler = new Spieler();
-                    spieler.Vorname = reader.GetString(i++);
-                    spieler.Nachname = reader.GetString(i++);
-                    spieler.UserName = reader.GetString(i++);
-                    i++;
-                    spieler.Score = Convert.ToInt32(reader.GetValue(i++));
-                    Console.WriteLine(spieler.ToString());
+                    while(listSpieler.Count < 5)
+                    {
+                        listSpieler.Add(new Spieler());
+                    }
+                }
 
-                    listSpieler.Add(spieler);
-                }
-                else
-                {
-                    reader.Close();
-                    break;
-                }
+                reader.Close();
+            
             }
+            catch(MySqlException ex)
+            {
+                Console.WriteLine(ex + "");
+            }
+            
+
 
             return listSpieler;
             
@@ -159,10 +180,11 @@ namespace WpfAppReturnOfSASHE
 
         public void UpdateScore(Spieler spieler)
         {
-            Stop();
-            command.CommandText = "UPDATE spieler SET Score = "+spieler.Score+" WHERE username = '"+ spieler.UserName+"' ;";
+            string cmd = "UPDATE spieler SET Score = "+spieler.Score+" WHERE username = '"+ spieler.UserName+"' ;";
             connection.Open();
+            command = new MySqlCommand(cmd, connection);
             command.ExecuteNonQuery();
+            
         }
 
         private object check(object o)

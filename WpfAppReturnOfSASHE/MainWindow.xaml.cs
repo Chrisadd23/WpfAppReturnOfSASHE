@@ -55,9 +55,12 @@ namespace WpfAppReturnOfSASHE
         {
             spieler = datenbank.checkAnmeldung(txt_userName.Text, txt_userPsw.Password);
             datenbank.Stop();
-            gameWindow = new GameWindow(spieler);
-            gameWindow.Show();
-            this.Close();
+            if(spieler != null)
+            {
+                gameWindow = new GameWindow(spieler);
+                gameWindow.Show();
+                this.Close();
+            }
         }
     }
 

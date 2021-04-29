@@ -34,15 +34,20 @@ namespace WpfAppReturnOfSASHE
         ImageBrush runner = new ImageBrush();
         ImageBrush runner2 = new ImageBrush();
 
+        Datenbank datenbank = new Datenbank();
         
         int i = 0;
 
-        SoundPlayer splayer  = new SoundPlayer("Musik\\EndeScore\\NGNL.wav");
+        SoundPlayer splayer;
         Spieler spieler;
+        List<Spieler> listSpieler = new List<Spieler>();
+
+        public List<Spieler> ListSpieler { get => listSpieler; set => listSpieler = value; }
 
         public SpielErgebnis()
         {
             InitializeComponent();
+            splayer = new SoundPlayer("Musik\\EndeScore\\NGNL.wav");
             splayer.Play();
             
             canvasSpielstand.Focus();
@@ -62,14 +67,43 @@ namespace WpfAppReturnOfSASHE
         public SpielErgebnis(Spieler spieler) : this()
         {
             this.spieler = spieler;
-            platz1.Text = spieler.ToString();
-        }
+            listSpieler = datenbank.RanglisteSpieler();
 
+            if (listSpieler[0] != null)
+            {
+                platz1.Text = ListSpieler[0].ToString();
+            }
+            else
+                platz1.Text = "";
 
+            if (listSpieler[1] != null)
+            {
+                platz2.Text = ListSpieler[1].ToString();
+            }
+            else
+                platz2.Text = "";
 
-        private void addScore(Spieler spieler)
-        {
-            
+            if (listSpieler[2] != null)
+            {
+                platz3.Text = ListSpieler[2].ToString();
+            }
+            else
+                platz3.Text = "";
+
+            if (listSpieler[3] != null)
+            {
+                platz4.Text = ListSpieler[3].ToString();
+            }
+            else
+                platz4.Text = "";
+
+            if (listSpieler[4] != null)
+            {
+                platz5.Text = ListSpieler[4].ToString();
+            }
+            else
+                platz5.Text = "";
+
         }
 
         private void CharakterBewegen(object sender, EventArgs e)
@@ -129,9 +163,7 @@ namespace WpfAppReturnOfSASHE
 
         private void btn_restart_Click(object sender, RoutedEventArgs e)
         {
-            gameTimer.Stop();
-            gameTimer2.Stop();
-            splayer.Stop();
+            Stop();
             restartGame();
         }
 
@@ -147,8 +179,24 @@ namespace WpfAppReturnOfSASHE
                 gameWindow = new GameWindow(spieler);
                 gameWindow.Show();
             }
-            
+
+            Stop();
             this.Close();
+        }
+
+        private void btn_logout_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            main.Show();
+            Stop();
+            this.Close();
+        }
+
+        private void Stop()
+        {
+            gameTimer.Stop();
+            gameTimer2.Stop();
+            splayer.Stop();
         }
     }
 }

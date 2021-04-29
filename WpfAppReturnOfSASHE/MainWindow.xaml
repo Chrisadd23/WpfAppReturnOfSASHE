@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppReturnOfSASHE"
         mc:Ignorable="d"
-        Title="Return of SASHE" ResizeMode="NoResize" Height="341.25" Width="406.25">
+        Title="Return of SASHE" ResizeMode="NoResize" Height="341.25" Width="406.25" WindowStartupLocation="CenterScreen">
 
 
     <Grid Background="Aquamarine" Margin="0,0,2,0">

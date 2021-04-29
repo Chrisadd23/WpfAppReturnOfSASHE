@@ -101,7 +101,6 @@
     <Compile Include="GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Musik.cs" />
     <Compile Include="Datenbank.cs" />
     <Compile Include="Registrieren.xaml.cs">
       <DependentUpon>Registrieren.xaml</DependentUpon>

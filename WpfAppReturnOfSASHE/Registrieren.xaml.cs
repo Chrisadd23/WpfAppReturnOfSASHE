@@ -20,7 +20,7 @@ namespace WpfAppReturnOfSASHE
     public partial class Registrieren : Window
     {
         Datenbank datenbank;
-        Spieler spieler;
+        
        
         public Registrieren()
         {
@@ -56,7 +56,7 @@ namespace WpfAppReturnOfSASHE
             else
             {
                 datenbank = new Datenbank();
-                spieler = datenbank.Registrieren(reg_Vorname.Text, reg_Nachname.Text, reg_Benutzername.Text, reg_Passwort.Text, reg_PasswortErneut.Text);
+                datenbank.Registrieren(reg_Vorname.Text, reg_Nachname.Text, reg_Benutzername.Text, reg_Passwort.Text, reg_PasswortErneut.Text);
 
                 datenbank.Stop();
             }

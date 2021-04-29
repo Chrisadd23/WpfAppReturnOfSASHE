@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppReturnOfSASHE"
         mc:Ignorable="d"
-        Title="SpielErgebnis" Height="450" Width="800">
+        Title="SpielErgebnis" Height="450" Width="800" WindowStartupLocation="CenterScreen">
 
     <Canvas x:Name="canvasSpielstand" >
         <Canvas.Background>
@@ -44,6 +44,7 @@
         <TextBlock></TextBlock>
 
         <Button x:Name="btn_restart" Click="btn_restart_Click" Content="Restart" Width="75" Canvas.Left="200" Canvas.Top="369"/>
+        <Button x:Name="btn_logout" Click="btn_lougout_Click" Content="Logout" Width="75" Canvas.Left="525" Canvas.Top="369"/>
 
 
     </Canvas>

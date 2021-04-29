@@ -392,7 +392,13 @@ namespace WpfAppReturnOfSASHE
             else
             {
                 if(score > spieler.Score)
+                {
                     spieler.Score = score;
+                    Datenbank db = new Datenbank();
+                    db.UpdateScore(spieler);
+                    db.Stop();
+                }
+                    
                 spielResult = new SpielErgebnis(spieler);
             }
                 
