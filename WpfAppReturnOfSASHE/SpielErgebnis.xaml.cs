@@ -184,19 +184,19 @@ namespace WpfAppReturnOfSASHE
             this.Close();
         }
 
-        private void btn_logout_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow main = new MainWindow();
-            main.Show();
-            Stop();
-            this.Close();
-        }
-
         private void Stop()
         {
             gameTimer.Stop();
             gameTimer2.Stop();
             splayer.Stop();
+        }
+
+        private void btn_lougout_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            main.Show();
+            Stop();
+            this.Close();
         }
     }
 }

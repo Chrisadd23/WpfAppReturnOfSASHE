@@ -29,8 +29,7 @@ namespace WpfAppReturnOfSASHE
 
         public Datenbank()
         {
-            OpenConnect();
-            
+            OpenConnect();  
         }
 
        
