@@ -152,7 +152,7 @@ namespace WpfAppReturnOfSASHE
             try
             {
                 connection.Open();
-                string cmd = "SELECT * FROM spieler ORDER BY Score DESC;";
+                string cmd = "SELECT * FROM spieler WHERE Score > 0 ORDER BY Score DESC;";
                 command = new MySqlCommand(cmd, connection);
                 reader = command.ExecuteReader();
 
@@ -168,7 +168,7 @@ namespace WpfAppReturnOfSASHE
                         i++;
                         spieler.Score = Convert.ToInt32(reader.GetValue(i++));
                         Console.WriteLine(spieler.ToString());
-
+                        
                         listSpieler.Add(spieler);
                     }
                     else
