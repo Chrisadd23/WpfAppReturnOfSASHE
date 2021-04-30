@@ -14,7 +14,7 @@
         <Label Content="Benutzername" HorizontalAlignment="Left" Margin="81,62,0,0" VerticalAlignment="Top"/>
         <Label Content="Passwort" HorizontalAlignment="Left" Margin="81,110,0,0" VerticalAlignment="Top" Width="86"/>
         <Button Content="Anmelden" Click="btn_clickAnmelden" HorizontalAlignment="Left" Margin="115,177,0,0" VerticalAlignment="Top" Width="183"/>
-        <Button Content="Registrieren" Click="btn_clickRegistrieren" HorizontalAlignment="Left" Margin="115,222,0,0" VerticalAlignment="Top" Width="183"/>
+        <Button Content="Registrieren" Click="btn_clickRegistrieren" HorizontalAlignment="Left" Margin="115,219,0,0" VerticalAlignment="Top" Width="183"/>
         <Button Content="Offline Spielen" Click="btn_startGameOffline" HorizontalAlignment="Left" Margin="115,260,0,0" VerticalAlignment="Top" Width="183"/>
 
     </Grid>
