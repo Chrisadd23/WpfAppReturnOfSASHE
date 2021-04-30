@@ -32,7 +32,39 @@ namespace WpfAppReturnOfSASHE
             OpenConnect();  
         }
 
-       
+        /*
+        public void createDatabase()
+        {
+            Stop();
+            string myConnection = "Server=localhost;Uid=root;Pwd=;database=neu"; //auf xampp basierend
+            string QueryCreateDB = "create database csprojektros;";
+            MySqlConnection conDataBase = new MySqlConnection(myConnection);
+            MySqlCommand cmdDataBase = new MySqlCommand(QueryCreateDB, conDataBase);
+
+            try
+            {
+                conDataBase.Open();
+                cmdDataBase.ExecuteNonQuery();
+                conDataBase.Close();
+
+
+                string createTable = "CREATE TABLE spieler(id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY," +
+                    "firstname VARCHAR(30) NOT NULL, lastname VARCHAR(30) NOT NULL," +
+                    "username VARCHAR(30) NOT NULL, userpassword VARCHAR(15) NOT NULL," +
+                    "Score INT(15) NOT NULL, locked INT(1) NOT NULL)";
+                MySqlConnection con = new MySqlConnection(myConnectionString);
+                MySqlCommand cmdTable = new MySqlCommand(createTable, con);
+                con.Open();
+                cmdDataBase.ExecuteNonQuery();
+                con.Close();
+
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e + "");
+            }
+        }
+       */
         private void OpenConnect()
         {
             try
@@ -41,33 +73,6 @@ namespace WpfAppReturnOfSASHE
             }
             catch(MySqlException ex)
             {
-                string QueryCreateDB = "create database csprojektros;";
-                MySqlConnection conDataBase = new MySqlConnection(myConnectionString);
-                MySqlCommand cmdDataBase = new MySqlCommand(QueryCreateDB, conDataBase);
-                
-                try
-                {
-                    conDataBase.Open();
-                    cmdDataBase.ExecuteNonQuery();
-                    conDataBase.Close();
-
-
-                    string createTable = "CREATE TABLE spieler(id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,"+
-                        "firstname VARCHAR(30) NOT NULL, lastname VARCHAR(30) NOT NULL,"+
-                        "username VARCHAR(30) NOT NULL, userpassword VARCHAR(15) NOT NULL,"+
-                        "Score INT(15) NOT NULL, locked INT(1) NOT NULL)";
-                    MySqlConnection con = new MySqlConnection(myConnectionString);
-                    MySqlCommand cmdTable = new MySqlCommand(createTable, con);
-                    con.Open();
-                    cmdDataBase.ExecuteNonQuery();
-                    con.Close();
-
-                }
-                catch(MySqlException e)
-                {
-                    MessageBox.Show(e + "");
-                }
-
                 MessageBox.Show(ex +"");
             }
         }
@@ -79,69 +84,87 @@ namespace WpfAppReturnOfSASHE
 
         public Spieler checkAnmeldung(string gui_Username, string gui_Userpasswort)
         {
-            connection.Open();
-            account = "SElECT * FROM spieler;";
-            command = new MySqlCommand(account, connection);
-            reader = command.ExecuteReader();
-
-            while(reader.Read())
+            try
             {
-                if (reader.GetString(3).Equals(gui_Username) && reader.GetString(4).Equals(gui_Userpasswort))
-                {
-                    spieler = new Spieler();
-                    spieler.Vorname = reader.GetString(1);
-                    spieler.Nachname = reader.GetString(2);
-                    spieler.UserName = reader.GetString(3);
-                    spieler.Passwort = reader.GetString(4);
-                    spieler.Score = Convert.ToInt32(check(reader[5]));
+                connection.Open();
+                account = "SElECT * FROM spieler;";
+                command = new MySqlCommand(account, connection);
+                reader = command.ExecuteReader();
 
-                    return spieler;
-
-                }
-                else if (reader.GetString(3).Equals(gui_Username))
+                while (reader.Read())
                 {
-                    if (!(reader.GetString(4).Equals(gui_Userpasswort)))
+                    if (reader.GetString(3).Equals(gui_Username) && reader.GetString(4).Equals(gui_Userpasswort))
                     {
-                        MessageBox.Show("Sie haben das Passwort falsch eingegeben!");
-                        reader.Close();
-                    }
-                    
-                }
-                
+                        spieler = new Spieler();
+                        spieler.Vorname = reader.GetString(1);
+                        spieler.Nachname = reader.GetString(2);
+                        spieler.UserName = reader.GetString(3);
+                        spieler.Passwort = reader.GetString(4);
+                        spieler.Score = Convert.ToInt32(check(reader[5]));
 
-            }//Ende While reader
+                        return spieler;
+
+                    }
+                    else if (reader.GetString(3).Equals(gui_Username))
+                    {
+                        if (!(reader.GetString(4).Equals(gui_Userpasswort)))
+                        {
+                            MessageBox.Show("Sie haben das Passwort falsch eingegeben!");
+                            reader.Close();
+                        }
+
+                    }
+
+                }//Ende While reader
+            }
+            catch(MySqlException ex)
+            {
+                MessageBox.Show(ex+ "");
+            }
             MessageBox.Show("Bitte Registirieren Sie sich oder spielen Sie offline");
+
+        
             return null;
         }
 
         public void Registrieren(string vorname, string nachname, string benutzername, string benutzerpasswort, string benutzerpasswortErneut)
         {
-             connection.Open();
-             account = "SElECT * FROM spieler;";
-             command = new MySqlCommand(account, connection);
-             reader = command.ExecuteReader();
-             while (reader.Read())
-             {
+            try
+            {
 
-                 if (reader.GetString(3).Equals(benutzername))
-                 {
-                     MessageBox.Show(benutzername + " ist schon vergeben");
-                    break;
-                 }
-                 else
-                 {
-                    MessageBox.Show(reader.GetString(3) + " " + benutzername);
-                    Stop();
-                    
-                    account = "INSERT INTO spieler (firstname,lastname,username,userpassword,Score,locked) VALUES ('" + vorname + "','" + nachname + "','" + benutzername + "','" + benutzerpasswort + "',0,0);";
-                    connection.Open();
-                    command = new MySqlCommand(account, connection);
-                    command.ExecuteNonQuery();
-                    
 
-                    break;
+                connection.Open();
+                account = "SElECT * FROM spieler;";
+                command = new MySqlCommand(account, connection);
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+
+                    if (reader.GetString(3).Equals(benutzername))
+                    {
+                        MessageBox.Show(benutzername + " ist schon vergeben");
+                        break;
+                    }
+                    else
+                    {
+                        MessageBox.Show(reader.GetString(3) + " " + benutzername);
+                        Stop();
+
+                        account = "INSERT INTO spieler (firstname,lastname,username,userpassword,Score,locked) VALUES ('" + vorname + "','" + nachname + "','" + benutzername + "','" + benutzerpasswort + "',0,0);";
+                        connection.Open();
+                        command = new MySqlCommand(account, connection);
+                        command.ExecuteNonQuery();
+
+
+                        break;
+                    }
                 }
-             }
+                reader.Close();
+            }
+            catch(MySqlException ex)
+            {
+                MessageBox.Show(ex + "");
+            }
 
             reader.Close();
         }
@@ -228,6 +251,7 @@ namespace WpfAppReturnOfSASHE
         public void Stop()
         {
             connection.Close();
+
         }
 
     }
