@@ -22,10 +22,10 @@ namespace WpfAppReturnOfSASHE
         Datenbank datenbank;
         
        
-        public Registrieren()
+        public Registrieren(Datenbank datenbank)
         {
             InitializeComponent();
-            
+            this.datenbank = datenbank;
         }
 
         private void btn_startMainWindow(object sender, RoutedEventArgs e)
@@ -55,7 +55,7 @@ namespace WpfAppReturnOfSASHE
             }
             else
             {
-                datenbank = new Datenbank();
+                
                 datenbank.Registrieren(reg_Vorname.Text, reg_Nachname.Text, reg_Benutzername.Text, reg_Passwort.Text, reg_PasswortErneut.Text);
 
                 datenbank.Stop();

@@ -34,7 +34,7 @@ namespace WpfAppReturnOfSASHE
         ImageBrush runner = new ImageBrush();
         ImageBrush runner2 = new ImageBrush();
 
-        Datenbank datenbank = new Datenbank();
+        Datenbank datenbank;
         
         int i = 0;
 
@@ -64,9 +64,10 @@ namespace WpfAppReturnOfSASHE
             gameTimer2.Start();
            
         }
-        public SpielErgebnis(Spieler spieler) : this()
+        public SpielErgebnis(Spieler spieler,Datenbank datenbank) : this()
         {
             this.spieler = spieler;
+            this.datenbank = datenbank;
             listSpieler = datenbank.RanglisteSpieler();
 
             if (listSpieler[0] != null)
@@ -176,7 +177,7 @@ namespace WpfAppReturnOfSASHE
             }
             else
             {
-                gameWindow = new GameWindow(spieler);
+                gameWindow = new GameWindow(spieler,datenbank);
                 gameWindow.Show();
             }
 

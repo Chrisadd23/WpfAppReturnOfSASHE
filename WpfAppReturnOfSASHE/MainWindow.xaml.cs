@@ -46,7 +46,7 @@ namespace WpfAppReturnOfSASHE
 
         private void btn_clickRegistrieren(object sender, RoutedEventArgs e)
         {
-            registrieren = new Registrieren();
+            registrieren = new Registrieren(datenbank);
             registrieren.Show();
             this.Close();
         }
@@ -63,7 +63,7 @@ namespace WpfAppReturnOfSASHE
                 datenbank.Stop();
                 if (spieler != null)
                 {
-                    gameWindow = new GameWindow(spieler);
+                    gameWindow = new GameWindow(spieler,datenbank);
                     gameWindow.Show();
                     this.Close();
                 }

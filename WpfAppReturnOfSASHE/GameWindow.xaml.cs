@@ -71,6 +71,9 @@ namespace WpfAppReturnOfSASHE
 
         Spieler spieler;
         SpielErgebnis spielResult;
+
+        Datenbank datenbank;
+
         
         public GameWindow()
         {
@@ -111,9 +114,10 @@ namespace WpfAppReturnOfSASHE
 
         }
 
-        public GameWindow(Spieler spieler) : this()
+        public GameWindow(Spieler spieler,Datenbank datenbank) : this()
         {
             this.spieler = spieler;
+            this.datenbank = datenbank;
         }
 
         private void levelSchwierigkeit(object sender, EventArgs e)
@@ -391,12 +395,11 @@ namespace WpfAppReturnOfSASHE
                 if(score > spieler.Score)
                 {
                     spieler.Score = score;
-                    Datenbank db = new Datenbank();
-                    db.UpdateScore(spieler);
-                    db.Stop();
+                    datenbank.UpdateScore(spieler);
+                    datenbank.Stop();
                 }
                     
-                spielResult = new SpielErgebnis(spieler);
+                spielResult = new SpielErgebnis(spieler,datenbank);
             }
                 
             
