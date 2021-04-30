@@ -490,19 +490,12 @@ namespace WpfAppReturnOfSASHE
             }
         }
 
-        private void KeyIsDown(object sender, KeyEventArgs e)
-        {
-
-
-        }
-
         private void KeyIsUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space && goUp == false && Canvas.GetTop(Charakter) == 303)
             {
                 goUp = true;
                 charakterIMG.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Bilder/Charakter/newRunner_02.gif"));
-
             }
         }
 
@@ -510,10 +503,12 @@ namespace WpfAppReturnOfSASHE
         {
             stopGame();
         }
-
+        
+        /*
         private void BtnClickMenue(object sender, RoutedEventArgs e)
         {
 
         }
+        */
     }
 }

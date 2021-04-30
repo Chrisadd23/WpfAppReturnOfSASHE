@@ -38,13 +38,9 @@ namespace WpfAppReturnOfSASHE
         MySqlConnection connection;
         MySqlCommand command;
         MySqlDataReader reader;
-       
-        
 
         Spieler spieler;
-        
 
-  
         private string account;
 
         public Datenbank()
@@ -110,7 +106,6 @@ namespace WpfAppReturnOfSASHE
             }
             MessageBox.Show("Bitte Registirieren Sie sich oder spielen Sie offline");
 
-        
             return null;
         }
 
@@ -119,22 +114,18 @@ namespace WpfAppReturnOfSASHE
             bool vergeben = false;
             try
             {
-
-
                 connection.Open();
                 account = "SElECT * FROM spieler;";
                 command = new MySqlCommand(account, connection);
                 reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-
                     if (reader.GetString(3).Equals(benutzername))
                     {
                         MessageBox.Show(benutzername + " ist schon vergeben");
                         vergeben = true;
                         break;
-                    }
-                    
+                    }     
                 }
                 if(vergeben == false)
                 {
@@ -151,7 +142,6 @@ namespace WpfAppReturnOfSASHE
             {
                 MessageBox.Show(ex + "");
             }
-
             reader.Close();
         }
 
@@ -161,13 +151,10 @@ namespace WpfAppReturnOfSASHE
 
             try
             {
-          
                 connection.Open();
                 string cmd = "SELECT * FROM spieler ORDER BY Score DESC;";
                 command = new MySqlCommand(cmd, connection);
                 reader = command.ExecuteReader();
-
-
 
                 while (reader.Read())
                 {
@@ -197,29 +184,29 @@ namespace WpfAppReturnOfSASHE
                         listSpieler.Add(new Spieler());
                     }
                 }
-
                 reader.Close();
-            
             }
             catch(MySqlException ex)
             {
-                Console.WriteLine(ex + "");
+                MessageBox.Show(ex + "");
             }
-            
-
-
             return listSpieler;
-            
         }
 
 
         public void UpdateScore(Spieler spieler)
         {
             string cmd = "UPDATE spieler SET Score = "+spieler.Score+" WHERE username = '"+ spieler.UserName+"' ;";
-            connection.Open();
-            command = new MySqlCommand(cmd, connection);
-            command.ExecuteNonQuery();
-            
+            try
+            {
+                connection.Open();
+                command = new MySqlCommand(cmd, connection);
+                command.ExecuteNonQuery();
+            }
+            catch(MySqlException ex)
+            {
+                MessageBox.Show(ex + "");
+            }
         }
 
         private object check(object o)
@@ -237,7 +224,6 @@ namespace WpfAppReturnOfSASHE
         public void Stop()
         {
             connection.Close();
-
         }
 
     }

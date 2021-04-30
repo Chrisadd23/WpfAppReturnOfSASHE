@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Return of SASHE" ResizeMode="NoResize" Height="579.5" Width="800" WindowStartupLocation="CenterScreen">
     
-    <Canvas Name="myCanvas" Focusable="true" Margin="4,-3,-4,3"  KeyDown="KeyIsDown" KeyUp="KeyIsUp">
+    <Canvas Name="myCanvas" Focusable="true" Margin="4,-3,-4,3"  KeyUp="KeyIsUp">
 
 
         <Rectangle x:Name="hintergrund1" Width="1579" Height="376" Canvas.Left="-2" Canvas.Top="60" RenderTransformOrigin="0.5,0.5" Fill="DarkGray" Panel.ZIndex="20" >
@@ -74,10 +74,14 @@
         <Rectangle x:Name="Hindernis3" Width="54"  Height="54"  Canvas.Left="2097" Fill="Red" Canvas.Top="349" Panel.ZIndex="100"/>
         <Label Content="Score:" Canvas.Left="555" Canvas.Top="494" RenderTransformOrigin="-0.731,0.519" FontSize="16" FontWeight="Bold" Panel.ZIndex="100" Foreground="White"/>
         <Label x:Name="lblScore"  Canvas.Left="632" Canvas.Top="494" RenderTransformOrigin="-0.566,-0.115" Width="126" Panel.ZIndex="100" FontSize="16" FontWeight="Bold" Foreground="White"/>
+        
+        <!-- 
         <Button x:Name="btnEinstellung"  Click="BtnClickMenue" Width="20" Height="20" Canvas.Left="49" Panel.ZIndex="100" Canvas.Top="10" RenderTransformOrigin="0.65,0.9">
             <Image Source="Bilder/HintergrundBilder/Einstellungen.png">
             </Image>
         </Button>
+        -->
+        
 
 
     </Canvas>
