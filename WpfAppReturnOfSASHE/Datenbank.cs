@@ -8,6 +8,25 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;     //--------------wichtig und notwendig für MySql verbindung/nutzung!!!
 using MySql.Data;
 
+/*
+ * Um das Spiel auf die richtige Datenbank zuzugreifen mit MySQL
+ * 
+ * create database csprojektros;
+ *           |
+ *           |
+ *           |
+ * CREATE TABLE spieler(
+ * id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ * firstname VARCHAR(30) NOT NULL, 
+ * lastname VARCHAR(30) NOT NULL,
+ * username VARCHAR(30) NOT NULL, 
+ * userpassword VARCHAR(15) NOT NULL,
+ * Score INT(15) NOT NULL, 
+ * locked INT(1) NOT NULL
+ * );
+ * 
+ */
+
 
 namespace WpfAppReturnOfSASHE
 {
@@ -32,39 +51,6 @@ namespace WpfAppReturnOfSASHE
             OpenConnect();  
         }
 
-        /*
-        public void createDatabase()
-        {
-            Stop();
-            string myConnection = "Server=localhost;Uid=root;Pwd=;database=neu"; //auf xampp basierend
-            string QueryCreateDB = "create database csprojektros;";
-            MySqlConnection conDataBase = new MySqlConnection(myConnection);
-            MySqlCommand cmdDataBase = new MySqlCommand(QueryCreateDB, conDataBase);
-
-            try
-            {
-                conDataBase.Open();
-                cmdDataBase.ExecuteNonQuery();
-                conDataBase.Close();
-
-
-                string createTable = "CREATE TABLE spieler(id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY," +
-                    "firstname VARCHAR(30) NOT NULL, lastname VARCHAR(30) NOT NULL," +
-                    "username VARCHAR(30) NOT NULL, userpassword VARCHAR(15) NOT NULL," +
-                    "Score INT(15) NOT NULL, locked INT(1) NOT NULL)";
-                MySqlConnection con = new MySqlConnection(myConnectionString);
-                MySqlCommand cmdTable = new MySqlCommand(createTable, con);
-                con.Open();
-                cmdDataBase.ExecuteNonQuery();
-                con.Close();
-
-            }
-            catch (MySqlException e)
-            {
-                MessageBox.Show(e + "");
-            }
-        }
-       */
         private void OpenConnect()
         {
             try
