@@ -53,14 +53,22 @@ namespace WpfAppReturnOfSASHE
 
         private void btn_clickAnmelden(object sender, RoutedEventArgs e)
         {
-            spieler = datenbank.checkAnmeldung(txt_userName.Text, txt_userPsw.Password);
-            datenbank.Stop();
-            if(spieler != null)
+            if(txt_userName.Text == "" || txt_userPsw.Password == "")
             {
-                gameWindow = new GameWindow(spieler);
-                gameWindow.Show();
-                this.Close();
+                MessageBox.Show("Bitte lassen sie die Felder nicht leer!");
             }
+            else
+            {
+                spieler = datenbank.checkAnmeldung(txt_userName.Text, txt_userPsw.Password);
+                datenbank.Stop();
+                if (spieler != null)
+                {
+                    gameWindow = new GameWindow(spieler);
+                    gameWindow.Show();
+                    this.Close();
+                }
+            }
+            
         }
     }
 

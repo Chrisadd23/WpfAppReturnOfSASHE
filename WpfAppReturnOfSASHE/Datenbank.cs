@@ -129,6 +129,7 @@ namespace WpfAppReturnOfSASHE
 
         public void Registrieren(string vorname, string nachname, string benutzername, string benutzerpasswort, string benutzerpasswortErneut)
         {
+            bool vergeben = false;
             try
             {
 
@@ -143,21 +144,19 @@ namespace WpfAppReturnOfSASHE
                     if (reader.GetString(3).Equals(benutzername))
                     {
                         MessageBox.Show(benutzername + " ist schon vergeben");
+                        vergeben = true;
                         break;
                     }
-                    else
-                    {
-                        MessageBox.Show(reader.GetString(3) + " " + benutzername);
-                        Stop();
+                    
+                }
+                if(vergeben == false)
+                {
+                    Stop();
 
-                        account = "INSERT INTO spieler (firstname,lastname,username,userpassword,Score,locked) VALUES ('" + vorname + "','" + nachname + "','" + benutzername + "','" + benutzerpasswort + "',0,0);";
-                        connection.Open();
-                        command = new MySqlCommand(account, connection);
-                        command.ExecuteNonQuery();
-
-
-                        break;
-                    }
+                    account = "INSERT INTO spieler (firstname,lastname,username,userpassword,Score,locked) VALUES ('" + vorname + "','" + nachname + "','" + benutzername + "','" + benutzerpasswort + "',0,0);";
+                    connection.Open();
+                    command = new MySqlCommand(account, connection);
+                    command.ExecuteNonQuery();
                 }
                 reader.Close();
             }
