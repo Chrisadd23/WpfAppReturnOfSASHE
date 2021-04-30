@@ -10,6 +10,7 @@ using MySql.Data;
 
 /*
  * Um das Spiel auf die richtige Datenbank zuzugreifen mit MySQL
+ * XAMPP 
  * 
  * create database csprojektros;
  *           |
