@@ -26,7 +26,7 @@ namespace WpfAppReturnOfSASHE
     /// </summary>
     public partial class MainWindow : Window
     {
-        Datenbank datenbank = new Datenbank();
+        Datenbank datenbank;
         GameWindow gameWindow;
         Registrieren registrieren;
         Spieler spieler;
@@ -40,12 +40,12 @@ namespace WpfAppReturnOfSASHE
         {
             gameWindow = new GameWindow();
             gameWindow.Show();
-            datenbank.Stop();
             this.Close();
         }
 
         private void btn_clickRegistrieren(object sender, RoutedEventArgs e)
         {
+            datenbank = new Datenbank();
             registrieren = new Registrieren(datenbank);
             registrieren.Show();
             this.Close();
@@ -59,6 +59,7 @@ namespace WpfAppReturnOfSASHE
             }
             else
             {
+                datenbank = new Datenbank();
                 spieler = datenbank.checkAnmeldung(txt_userName.Text, txt_userPsw.Password);
                 datenbank.Stop();
                 if (spieler != null)

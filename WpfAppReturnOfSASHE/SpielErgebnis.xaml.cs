@@ -170,7 +170,8 @@ namespace WpfAppReturnOfSASHE
 
         private void restartGame()
         {
-            if(spieler == null)
+            Stop();
+            if (spieler == null)
             {
                 gameWindow = new GameWindow();
                 gameWindow.Show();
@@ -181,7 +182,7 @@ namespace WpfAppReturnOfSASHE
                 gameWindow.Show();
             }
 
-            Stop();
+            
             this.Close();
         }
 
