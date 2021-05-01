@@ -57,8 +57,7 @@ namespace WpfAppReturnOfSASHE
             {
                 
                 datenbank.Registrieren(reg_Vorname.Text, reg_Nachname.Text, reg_Benutzername.Text, reg_Passwort.Text, reg_PasswortErneut.Text);
-
-                datenbank.Stop();
+                //datenbank.Stop();
                 reg_Vorname.Text = "";
                 reg_Nachname.Text = "";
                 reg_Benutzername.Text = "";

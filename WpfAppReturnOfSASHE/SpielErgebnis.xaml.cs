@@ -69,6 +69,7 @@ namespace WpfAppReturnOfSASHE
             this.spieler = spieler;
             this.datenbank = datenbank;
             listSpieler = datenbank.RanglisteSpieler();
+            //datenbank.Stop();
 
             if (listSpieler[0] != null)
             {

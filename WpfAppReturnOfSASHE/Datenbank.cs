@@ -85,6 +85,7 @@ namespace WpfAppReturnOfSASHE
                         spieler.Passwort = reader.GetString(4);
                         spieler.Score = Convert.ToInt32(check(reader[5]));
 
+                        Stop();
                         return spieler;
 
                     }
@@ -105,7 +106,7 @@ namespace WpfAppReturnOfSASHE
                 MessageBox.Show(ex+ "");
             }
             MessageBox.Show("Bitte Registirieren Sie sich oder spielen Sie offline");
-
+            Stop();
             return null;
         }
 
@@ -142,6 +143,7 @@ namespace WpfAppReturnOfSASHE
             {
                 MessageBox.Show(ex + "");
             }
+            Stop();
             reader.Close();
         }
 
@@ -190,6 +192,7 @@ namespace WpfAppReturnOfSASHE
             {
                 MessageBox.Show(ex + "");
             }
+            Stop();
             return listSpieler;
         }
 
@@ -207,6 +210,7 @@ namespace WpfAppReturnOfSASHE
             {
                 MessageBox.Show(ex + "");
             }
+            Stop();
         }
 
         private object check(object o)

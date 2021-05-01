@@ -396,7 +396,7 @@ namespace WpfAppReturnOfSASHE
                 {
                     spieler.Score = score;
                     datenbank.UpdateScore(spieler);
-                    datenbank.Stop();
+                    //datenbank.Stop();
                 }
                     
                 spielResult = new SpielErgebnis(spieler,datenbank);
